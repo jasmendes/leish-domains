@@ -64,33 +64,30 @@ import datetime, time
 time_begin = datetime.datetime.fromtimestamp(time.time())
 
 import string
-print string.punctuation
+print (string.punctuation)
 
 import sys, os
 
 import fnmatch
+import shutil
 
-print "FILE PATH:", sys.argv[0]
-print "FILE NAME:", os.path.basename(sys.argv[0])
+
+print ("FILE PATH:", sys.argv[0])
+print ("FILE NAME:", os.path.basename(sys.argv[0]))
 
 sys.path.append("C:\Python276\Lib\site-packages")
 
+## myroot = "C:\Users\\mendes\\Dropbox\\Thesis\\aeferreira\\leishdomains"
 
-
-import shutil
-myroot = "C:\Users\\mendes\\Dropbox\\Thesis\\aeferreira\\leishdomains"
 
 
 ########################        IMPORT MODULE FUNCTIONS       ############################
 
-print """\nSpecial dependencies are:
+print ("""\nSpecial dependencies are:
     Tkinter, 
     biopython; bioservices; xmltramp; wsdl; soappy;
     numpy; scipy; matplotlib;
-    Venn3;Venn 
-    
-    
-"""
+    Venn3;Venn """)
 
 from bioservices_functions_tk import *
 
@@ -151,7 +148,7 @@ global choice2
 
 
 modulenames = set(sys.modules)&set(globals())
-print modulenames
+print (modulenames)
 
 allmodules = [sys.modules[name] for name in modulenames]
 #print allmodules
@@ -371,7 +368,7 @@ def upload_file_list():
         global choice
         #global choice2
 
-        print  "FILE SELECTED : ", showname
+        print  ("FILE SELECTED : ", showname)
         updatecombolist(theFilenames1)
         theInputFiles.append(showname)
         #updatecombolist2theFilenames1)
@@ -465,7 +462,7 @@ def upload_file_list2():
         showinfo("OK", "Filename :\n"+filename_input3)
         theFilenames1.append(showname)
         global choice2
-        print  "FILE SELECTED :", showname
+        print  ("FILE SELECTED :", showname)
         #updatecombolist(theFilenames1)
         updatecombolist2(theFilenames1)
         theInputFiles.append(showname)
@@ -494,20 +491,20 @@ def upload_file_list2():
 def print_readme(theFilename):
     f = open(theFilename, "r")
     for i in f.readlines():
-        print i
+        print (i)
     f.close()
 
 def print_panel(theFilename3):
     f = open(theFilename3, "r")
     for i in f.readlines():
-        print i
+        print (i)
     f.close()
 
 
 def print_authors():
     
     global _authors
-    print _authors
+    print (_authors)
     
 
 
@@ -519,7 +516,7 @@ def print_readme2(theFilename2):
     #window = Gui()
     f = open(theFilename2, "r")
     for i in f.readlines():
-        print i
+        print (i)
     f.close()
     #window.mainloop()
 
@@ -550,7 +547,7 @@ def get_tax_data(taxid):
 
 def get_tax_id_w_name():
     if not Entrez.email:
-        print "you must add your email address"
+        print ("you must add your email address")
         sys.exit(2)
     #list = ['Leishmania infantum JPCM5','Helicobacter pylori 26695', 'Thermotoga maritima MSB8', 'Deinococcus radiodurans R1', 'Treponema pallidum subsp. pallidum str. Nichols', 'Aquifex aeolicus VF5', 'Archaeoglobus fulgidus DSM 4304']
     #i = iter(list)
@@ -562,8 +559,8 @@ def get_tax_id_w_name():
     data = get_tax_data(taxid)
     lineage = {d['Rank']:d['ScientificName'] for d in
                 data[0]['LineageEx'] if d['Rank'] in ['phylum']}
-    print lineage
-    print "Tax ID is: %s" % taxid, "\n"
+    print (lineage)
+    print ("Tax ID is: %s" % taxid, "\n")
 
 ##################################################################
 
@@ -571,7 +568,7 @@ import webbrowser
 
 def from_uni_id_get_interpro_browser(theUniIDs):
 
-    print "Query Limit = 10 proteins "
+    print ("Query Limit = 10 proteins ")
     for i in theUniIDs[0:10]:
         webbrowser.open("http://www.ebi.ac.uk/interpro/protein/"+str(i))
 
@@ -579,19 +576,19 @@ def from_uni_id_get_interpro_browser(theUniIDs):
 
 def from_uni_id_find_similar_proteins(theUniIDs):
 
-    print "Query Limit = 10 proteins "
+    print ("Query Limit = 10 proteins ")
     for i in theUniIDs[0:10]:
         webbrowser.open("http://www.ebi.ac.uk/interpro/protein/"+str(i)+"/similar-proteins")
 
 def from_kegg_paths_show_genes(theKeggPaths):
 
-    print "Query Limit = 10 proteins "
+    print ("Query Limit = 10 proteins ")
     for i in theKeggPaths[0:10]:
         webbrowser.open("http://www.kegg.jp/entry/"+str(i))
 
 
 def open_ncbi_blast():
-    print "NCBI Blast in Browser . . . "
+    print ("NCBI Blast in Browser . . . ")
     webbrowser.open("http://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastSearch&PROG_DEF=blastn&BLAST_PROG_DEF=megaBlast&BLAST_SPEC=blast2seq")
 
 def sequence_search_egg():
@@ -611,7 +608,7 @@ e = StringVar()
 
 def okk(root5,e):
     
-    print "Session Tag Name is : ", e.get()
+    print ("Session Tag Name is : ", e.get())
     
     global fnam
     fnam = e.get()
@@ -692,13 +689,13 @@ def new_session():
 
     folder = tkFileDialog.askdirectory(initialdir='.')
 
-    print "FOLDER : ", folder
+    print ("FOLDER : ", folder)
     os.chdir(folder)
     fnames = glob("*.txt") + glob("*.xls")
     os.chdir(myroot)
     
     for i, f in enumerate(fnames):
-        print i, f
+        print (i, f)
         namebase = os.path.basename(f)
         namedir = folder.split("/")[-1]
         namewdir = namedir + "\\" + namebase
@@ -713,7 +710,7 @@ def new_session():
 
     showinfo(" New Session ", "Folder imported :\n"+namewdir)
     #print "\n", af.name, "saved!"
-    print "\nNew Session  . . .", folder, "\n", "complete!"
+    print ("\nNew Session  . . .", folder, "\n", "complete!")
 
 
 
@@ -747,7 +744,7 @@ def save_session(theInputFiles):
    
     ###  OPEN POP UP BOX
 
-    print "###################    Saving Session    ########################"
+    print ("###################    Saving Session    ########################")
     #name= raw_input("\Enter Tag: ")
 
     #namex = enter_name() #
@@ -763,7 +760,7 @@ def save_session(theInputFiles):
         showinfo("Save session", "No Session Saved!")
         return
     
-    print "Folder : ", path
+    print ("Folder : ", path)
     
     if not os.path.isdir(path):
         os.makedirs(path) # NEW DIRECTORY
@@ -772,7 +769,7 @@ def save_session(theInputFiles):
 
     pname =  str(path)+"\\SESSION_"+str(fnam)+".txt"
     af = open(pname, "w")
-    print "Session File: ",pname
+    print ("Session File: ",pname)
 
 
     for j,i in enumerate(theInputFiles):
@@ -792,7 +789,7 @@ def save_session(theInputFiles):
         source = os.path.abspath(i)
         dest = myroot+"\\"+predest
 
-        print j, "Source:  " , source,"\n", j, "Destiny: ",dest
+        print (j, "Source:  " , source,"\n", j, "Destiny: ",dest)
 
         shutil.copyfile(source, dest)
 
@@ -801,15 +798,14 @@ def save_session(theInputFiles):
         # shutil.move("path/to/current/file.foo", "path/to/new/destination/for/file.foo")
 
     showinfo(" Save Session ", "Complete :\n"+path)
-    print "\n", af.name, "saved!"
-    print "Session Saving . . .", path, "\n", "complete!"
-
+    print ("\n", af.name, "saved!")
+    print ("Session Saving . . .", path, "\n", "complete!")
 
 
 def load_session():
     #name = raw_input("Enter File Name: ")
 
-    print "\n##########    LOADING SESSION      ############"
+    print ("\n##########    LOADING SESSION      ############")
 
     
 
@@ -837,7 +833,7 @@ def load_session():
         
         for line in aFile.readlines():
             line = line.strip()
-            print i, line
+            print (i, line)
             theInputFiles.append(line)
             #print lineaf = open(afile, "r")
             #if len(i.split("."))==2:
@@ -848,7 +844,7 @@ def load_session():
             
         aFile.close()
         showinfo(" Load Session ", "Complete :\n"+name)
-        print "\nSession Loading . . . ", name ,"\n","Complete!"
+        print ("\nSession Loading . . . ", name ,"\n","Complete!")
     else:
         showinfo(" Load Session ", "No Session loaded . . . ")
 
@@ -869,20 +865,20 @@ venn_e3 = StringVar()
 
 def newselection_v1( event):
     value_of_combo = cboxv1.get()
-    print(value_of_combo), " #  >>>>>    venn 3 File (1) !"
+    print((value_of_combo), " #  >>>>>    venn 3 File (1) !")
     global choicev1
     choicev1 = cboxv1.get()
     
 
 def newselection_v2( event):
     value_of_combo = cboxv2.get()
-    print(value_of_combo), " #  >>>>>   venn 3 File (2) !"
+    print((value_of_combo), " #  >>>>>   venn 3 File (2) !")
     global choicev2
     choicev2 = cboxv2.get()
 
 def newselection_v3( event):
     value_of_combo = cboxv3.get()
-    print(value_of_combo), " #  >>>>>    venn 3 File (3) !"
+    print ((value_of_combo), " #  >>>>>    venn 3 File (3) !")
     global choicev3
     choicev3 = cboxv3.get()
 
@@ -971,7 +967,7 @@ def updatecombolist_v3(theInputFiles):
 
 def ok_venn(root6,choicev1,choicev2,choicev3):
     
-    print "Venn3 Diagram : %s %s %s " % (choicev1,choicev2, choicev3)
+    print ("Venn3 Diagram : %s %s %s " % (choicev1,choicev2, choicev3))
     
     
     get_domain_venn_diagram1(choicev1,choicev2,choicev3)
@@ -1423,32 +1419,32 @@ v6.set("1FDH")
 ###########################################################################
 ###################################        CALLBACKS         ##############
 def cb1():
-    print "\tTax ID : %s" %E01.get()
+    print ("\tTax ID : %s" %E01.get())
     my_text_box.delete(1.0, END)
     my_text_box.insert( END,  E01.get()+"\n")
 
 def cb2():
-    print "\tUniProt ID : %s" %E02.get()
+    print ("\tUniProt ID : %s" %E02.get())
     my_text_box.delete(1.0, END)
     my_text_box.insert( END,  E02.get()+"\n")
 
 def cb3():
-    print "\tInterPro ID : %s" %E03.get()
+    print ("\tInterPro ID : %s" %E03.get())
     my_text_box.delete(1.0, END)
     my_text_box.insert( END,  E03.get()+"\n")
 
 def cb4():
-    print "\tGO ID : %s" %E04.get()
+    print ("\tGO ID : %s" %E04.get())
     my_text_box.delete(1.0, END)
     my_text_box.insert( END,  E04.get()+"\n")
 
 def cb5():
-    print "\tGene ID : %s" %E05.get()
+    print ("\tGene ID : %s" %E05.get())
     my_text_box.delete(1.0, END)
     my_text_box.insert( END,  E05.get()+"\n")
 
 def cb6():
-    print "\tPDB ID : %s" %E06.get()
+    print ("\tPDB ID : %s" %E06.get())
     my_text_box.delete(1.0, END)
     my_text_box.insert( END,  E06.get()+"\n")
 
@@ -1548,14 +1544,14 @@ def save_my_text():
         aFile.write(line+"\n")
     aFile.close()
     theInputFiles.append(aFile.name)
-    print aFile.name, "saved!"
+    print (aFile.name, "saved!")
 
 
 def file_save_from_box():
 
     # http://stackoverflow.com/questions/19476232/save-file-dialog-in-tkinter
 
-    mypath = "C:\Users\mendes\Dropbox\Thesis\aeferreira\leishdomains"
+    ## mypath = ##"C:\Users\mendes\Dropbox\Thesis\aeferreira\leishdomains"
     mydir = "leishdomains"
     
 
@@ -1612,7 +1608,7 @@ def file_save_from_box():
             showname = namewdir
 
         theInputFiles.append(showname)
-        print "\n",showname, "saved!"
+        print ("\n",showname, "saved!")
         
             
         
@@ -1645,7 +1641,7 @@ def openexcelfile(choice):
     # os.chdir(sys.path[0])
     # or give full path for the file you want to open
     # os.system('start excel.exe "%s\\file.xls"' % (sys.path[0], ))
-    print sys.path[0]
+    print (sys.path[0])
     mypath = os.path.abspath(choice)
 
     os.system('start excel.exe %s' % (mypath))
@@ -1680,11 +1676,11 @@ ac_IDS = []
 def retrieve_input():
     text1 =my_text_box.get('1.0',END).splitlines() # retrieve as list
     # input = self.myText_Box.get("1.0",'end-1c')
-    print text1
+    print (text1)
     for i in text1:
-        print i
+        print (i)
         ac_IDS.append(i)
-    print ac_IDS
+    print (ac_IDS)
 
 ####################################################################################
 import io
@@ -1697,7 +1693,7 @@ def count_input():
             continue
         else:
             line = line.rstrip()
-            print line
+            print (line)
         IDs+=1
     result1.set('Total IDs : '+str(IDs))
 
@@ -1752,7 +1748,7 @@ def check():
         if len(line) <= 1:
             pass #
         elif len(line.split(" ")) > 1:
-            print "Words : %s" %line
+            print ("Words : %s" %line)
             if line not in species_list:
                 species_list.append(line)
                 #IDs +=1
@@ -1824,23 +1820,23 @@ def check():
             
 
         else:
-            print "what is this ID? %s" %line
+            print ("what is this ID? %s" %line)
             if line not in Words:
                 Words.append(line)
                 IDs += 1
 
     result2.set('Unique IDs : '+str(IDs))
-    print "########################################################################"
+    print ("########################################################################")
     
-    print "Unique Tax IDs :" , len(theTaxIDs)
-    print "Unique UniProt IDs :" , len(theUniIDs)
-    print "Unique InterPro IDs :" , len(theIprIDs)
-    print "Unique GO IDs :" , len(theGOIDs)
-    print "Unique Gene IDs :" , len(theGeneIDs)
-    print "Unique ECs :" , len(theECs)
-    print "Unique PDB IDs :" , len(thePDBIDs)
-    print "Unique Kegg path IDs :" , len(theKeggPaths)
-    print "Unique Words :" , len(Words)
+    print ("Unique Tax IDs :" , len(theTaxIDs))
+    print ("Unique UniProt IDs :" , len(theUniIDs))
+    print ("Unique InterPro IDs :" , len(theIprIDs))
+    print ("Unique GO IDs :" , len(theGOIDs))
+    print ("Unique Gene IDs :" , len(theGeneIDs))
+    print ("Unique ECs :" , len(theECs))
+    print ("Unique PDB IDs :" , len(thePDBIDs))
+    print ("Unique Kegg path IDs :" , len(theKeggPaths))
+    print ("Unique Words :" , len(Words))
     
 
 
@@ -1888,7 +1884,7 @@ frame023.pack()
 Label(frame023,text="Search . . . ").pack()
 
 def search_protein_in_uniprot(theUniIDs):
-    print "Query Limit = 10 proteins"
+    print ("Query Limit = 10 proteins")
     for i in theUniIDs[0:10]:
         webbrowser.open("http://www.uniprot.org/uniprot/"+str(i))
 
@@ -1897,7 +1893,7 @@ def search_protein_in_uniprot(theUniIDs):
 
 def from_uni_gene_get_kegg_orthologues(theUniIDs,theGeneIDs):
 
-    print "Query Limit = 10 proteins / genes"
+    print ("Query Limit = 10 proteins / genes")
     if theUniIDs > 0 :
         for i in theUniIDs[0:10]:
             from_uni_id_get_kegg_orthologues(i)
@@ -1905,10 +1901,10 @@ def from_uni_gene_get_kegg_orthologues(theUniIDs,theGeneIDs):
         for i in theGeneIDs[0:10]:
             from_gene_id_get_kegg_orthologues(i)
     else:
-        print "IDs not valid! Try again..."
+        print ("IDs not valid! Try again...")
 
 def from_uni_id_get_kegg_map(theUniIDs):
-    print "Query Limit = 10 proteins"
+    print ("Query Limit = 10 proteins")
     for i in theUniIDs[:10]:
         from_uni_id_get_kegg_spot(i)
         ##from_uni_ids_get_kegg_path_marker(i)
@@ -1995,7 +1991,7 @@ def report():
     res = "Database Retrieval :\n"  #princ�pio da msg
     for i in range(len(vars)):
         if vars[i].get() ==1:  # o val�r � 1 (marcado) ou 0 (n�o marcado)
-            print databases[i]
+            print (databases[i])
             res = res + " " + databases[i] + '\n' #dias � uma lista de strings
     showinfo("Escolhas", res)
 
@@ -2020,23 +2016,23 @@ def convert_ac2gene(theTaxID):
         #print i
         acID = i.strip().split("\t")[2]
         geneIDs = i.strip().split("\t")[5]
-        print acID
+        print (acID)
         for j in geneIDs.split(" "):
             if "Linj" in j:
-                print j
+                print (j)
             elif "LINJ" in j:
-                print j
+                print (j)
             elif "LinJ" in j:
-                print j
+                print (j)
             elif "" == j:
-                print "NO gene NAME", acID
+                print ("NO gene NAME", acID)
             else:
-                print "Gene name:", j
+                print ("Gene name:", j)
 
 def lab2uni2ipr2go2kegg(theFilename):
     f=open(theFilename, "r")
     for i in f.readlines():
-        print i
+        print (i)
 
 
 
@@ -2059,14 +2055,14 @@ def print_data():
     """Start data retrieval by check button """
     #theTaxID = E01.get()
     #print "Tax ID is ", theTaxID
-    print "###################################      RUNNING      ###################################"
-    print theTaxIDs
-    print theUniIDs
-    print theIprIDs
-    print theGOIDs
-    print theGeneIDs
-    print theKeggIDs
-    print thePDBIDs
+    print ("###################################      RUNNING      ###################################")
+    print (theTaxIDs)
+    print (theUniIDs)
+    print (theIprIDs)
+    print (theGOIDs)
+    print (theGeneIDs)
+    print (theKeggIDs)
+    print (thePDBIDs)
 
     #theGeneIDs = convert_ac2gene(the_aclist)
 
@@ -2074,7 +2070,7 @@ def print_data():
     # define 3 last functions glue
     for i in range(len(vars)):
         if vars[i].get() == 1:
-            print "\n > > > Database Loading . . .", databases[i]
+            print ("\n > > > Database Loading . . .", databases[i])
             if databases[i] =="UniProt":
                 if len(theTaxIDs) > 0 :
                     for id in theTaxIDs:
@@ -2087,7 +2083,7 @@ def print_data():
                     hours = minutes /60
                     h = float("{0:.1f}".format(hours))
                     response = "Time Expected: " , m, " minutes,  ",h, " hours."
-                    print response
+                    print (response)
                     from_uni_id_get_bs_uniprot1(theUniIDs)
 
                 elif len(theUniIDs) > 499:
@@ -2097,7 +2093,7 @@ def print_data():
                     hours = minutes /60
                     h = float("{0:.1f}".format(hours))
                     response = "Time Expected: " , m, " minutes,  ",h, " hours."
-                    print response
+                    print (response)
 
                     Freq = 1000
                     Dur = 100
@@ -2107,7 +2103,7 @@ def print_data():
                     choicesy = ["y", "Y"]
                     choicesn = ["N", "n"]
                     if quest in choicesn:
-                        print "Try another database ! Thank You "
+                        print ("Try another database ! Thank You ")
 
                     elif quest in choicesy:
                         from_uni_id_get_bs_uniprot1(theUniIDs)
@@ -2118,7 +2114,7 @@ def print_data():
                     from_gene_id_get_bs_uniprot1(theGeneIDs)
                     
                 else:
-                    print "IDs are not valid  for UniProt. . ."
+                    print ("IDs are not valid  for UniProt. . .")
 
             if databases[i] =="BioMart":
                 if len(theTaxIDs) > 0 :
@@ -2133,7 +2129,7 @@ def print_data():
                     hours = minutes /60
                     h = float("{0:.1f}".format(hours))
                     response = "Time Expected: " , m, " minutes,  ",h, " hours."
-                    print response
+                    print (response)
                     Freq = 1000
                     Dur = 100
                     winsound.Beep(Freq,Dur)
@@ -2141,7 +2137,7 @@ def print_data():
                     choicesy = ["y", "Y"]
                     choicesn = ["N", "n"]
                     if quest in choicesn:
-                        print "Try another database ! Thank You "
+                        print ("Try another database ! Thank You ")
 
                     elif quest in choicesy:
                         from_uni_id_get_bs_ac2ipr2go(theUniIDs)
@@ -2150,7 +2146,7 @@ def print_data():
                 elif len(theIprIDs) > 0 :
                     from_ipr_id_get_bs_ipr2go(theIprIDs)
                 else:
-                    print "IDs are not valid for BioMart. . ."
+                    print ("IDs are not valid for BioMart. . .")
 
             if databases[i] =='QuickGO':
                 if len(theTaxIDs) > 0:
@@ -2161,7 +2157,7 @@ def print_data():
                 elif len(theGOIDs) > 0 :
                     from_go_ids_get_quickgo(theGOIDs)
                 else:
-                    print "IDs are not valid  for QuickGO. . ."
+                    print ("IDs are not valid  for QuickGO. . .")
 
             if databases[i] =='KEGG':
 
@@ -2186,7 +2182,7 @@ def print_data():
                             #convert_ac2gene(theTaxID)
 
                 else:
-                    print "IDs are not valid for KEGG. . ."
+                    print ("IDs are not valid for KEGG. . .")
 
             if databases[i] =='PDB':
                 if len(thePDBIDs) > 0 :
@@ -2198,7 +2194,7 @@ def print_data():
                     #from_uni_ids_get_pdb(theUniIDs)
                     getPdbinfo(theUniIDs)
                 else:
-                    print "IDs are not valid for PDB. . ."
+                    print ("IDs are not valid for PDB. . .")
 
             if databases[i] =='SwissProt':
                 if len(theUniIDs) > 0 :
@@ -2208,13 +2204,13 @@ def print_data():
                     hours = minutes /60
                     h = float("{0:.1f}".format(hours))
                     response = "Time Expected: " , m, " minutes,  ",h, " hours."
-                    print response
+                    print (response)
                     get_bioblast_record(theUniIDs)
                     # access_bioblast_with_biopython(theUniIDs) # TRANFER TO SUMMARY Analysis as BioBlas
 
             else:
-                print "No Databases selected ." 
-    print "######################################     Complete!     ################################################"
+                print ("No Databases selected ." )
+    print ("######################################     Complete!     ################################################")
 
 
                         # import run_biopython_tk
@@ -2275,7 +2271,7 @@ def save_unique(thefiles):
     for i in range(len(thefiles[:3])):
         if len(thefiles[i]) > 1:
             vars[i] = thefiles[i]
-            print i, vars[i]
+            print (i, vars[i])
         count += 1
     theOutput = str(raw_input("Save file as : ")+"_merged.txt")
     save_input_file_to_append_by_ac_ids(vars[0], vars[1], vars[2],vars[3],vars[4],vars[5],vars[6], theOutput)
@@ -2389,12 +2385,12 @@ theFilenames = ["outputs/5671_ac_entry_ipr_name_gene_go_path_local_exi.txt",
 
 def summary_funtions_1(theFilenames):
 
-    print "\nUniProt by tax id "
-    print '[1] Loading protein accessions '
-    print theFilenames[0]
+    print ("\nUniProt by tax id ")
+    print ('[1] Loading protein accessions ')
+    print (theFilenames[0])
     Lin_Proteins = load_proteins_accessions(str(theFilenames[0])) # "output/5671_ac_entry_ipr_name_gene_go_path_local_exi_short.txt")
 
-    print '[2] Summary Analysis '
+    print ('[2] Summary Analysis ')
 
     count_ipr_from_table_list(str(theFilenames[0]))
     count_go_terms_from_table_list(str(theFilenames[0]))
@@ -2402,13 +2398,13 @@ def summary_funtions_1(theFilenames):
     count_gene_from_table_list(str(theFilenames[0]))
     count_protein_existence(str(theFilenames[0]))
 
-    print "\nInterPro Biomart by tax id "
-    print '[3] Map InterPro 2 GO with BiomartQuery  '
+    print ("\nInterPro Biomart by tax id ")
+    print ('[3] Map InterPro 2 GO with BiomartQuery  ')
     #get_interpro2go("output/5671_ac_ipr_interpro-bmq.txt", "output/interpro2go.txt")
     theDomains = load_GO_list("output/interpro2go.txt")
     get_interpro2go(str(theFilenames[1]), theDomains) # output/5671_ac_ipr_interpro-bmq.txt"
     ####################################################################
-    print '[3] Map InterPro 2 GO with BiomartView '
+    print ('[3] Map InterPro 2 GO with BiomartView ' )
 
 
 ####
@@ -2422,8 +2418,8 @@ def summary_analysis():
     i = 0               # usually has a control variable to start the while loop
     while i < 20:       # terminating condition: while loop will terminate if i >= 10
         i += 1          # changing the value of the control variable
-        print '|' * i
-    print "                                                        100%"
+        print ('|' * i)
+    print ("                                                        100%")
 
     import run_summary_functions_bs_tk  # loads and runs
 
@@ -2465,10 +2461,10 @@ frm1.pack()
 # import summary_functions_tk
 def retrieve2stats(theInputFiles):
     for i in theInputFiles:
-        print 'Reading tab file -----------------------------------------------'
+        print ('Reading tab file -----------------------------------------------')
         filename = i
         prot_data, fields = readUniProtTab_sum(filename, with_fields=True)
-        print 'there are', len(prot_data), 'proteins in file', filename
+        print ('There are', len(prot_data), 'proteins in file', filename)
 
 
 
@@ -2691,7 +2687,7 @@ def CurSelet(evt):
     numbers = ["1", "2","3","4","5","6","7","8","9","0"]
     value=str(mylistbox.get(mylistbox.curselection()))#mylistbox.get(ACTIVE)))
 
-    print value
+    print (value)
     items = value.split("    ")
     #print items[1]
     #for i in items:
@@ -2913,7 +2909,7 @@ def delete1(thefile):
         theFilenames1.remove(thefile)
         if thefile in theInputFiles:
             theInputFiles.remove(thefile)
-    print thefile, " is removed !"
+    print (thefile, " is removed !")
 
 #
 
@@ -2926,7 +2922,7 @@ def delete2(thefile):
         theFilenames1.remove(thefile)
         if thefile in theInputFiles:
             theInputFiles.remove(thefile)
-    print thefile, " is removed !"
+    print (thefile, " is removed !")
     #else:
     #print thefile, " is removed !"
 
@@ -3022,7 +3018,7 @@ def onselect(evt):
     w = evt.widget
     index = int(w.curselection()[0])
     value = w.get(index)
-    print 'You selected item %d: "%s"' % (index, value)
+    print ('You selected item %d: "%s"' % (index, value))
 
 def open_list_box():
 
@@ -3040,7 +3036,7 @@ LINKS=("http://www.python.org", "http://www.heaven.com")
 
 def showLink(event):
     idx= int(event.widget.tag_names(CURRENT)[1])
-    print LINKS[idx]
+    print (LINKS[idx])
 
 def open_text_list(choice):
 
@@ -3071,7 +3067,7 @@ def open_text_list(choice):
 
 def use_selected(selected):
 
-    print selected
+    print (selected)
     for i in selected.split("\t"):
         webbrowser.open("http://www.ebi.ac.uk/interpro/protein/"+str(i)) # "http://www.python.org") #+str(selected))
         #from_uni_id_get_interpro_browser(theUniIDs):
@@ -3130,7 +3126,7 @@ def combo2(frm222,theFilenames1):
 
 def newselection( event):
     value_of_combo = cbox.get()
-    print "#################################################################"
+    print ("#################################################################")
     print(value_of_combo), " #  >>>>>    New Selection (1) !"
     global choice
     choice = cbox.get()
@@ -3141,7 +3137,7 @@ def newselection( event):
 
 def newselection2( event):
     value_of_combo = cbox2.get()
-    print "#################################################################"
+    print ("#################################################################")
     print(value_of_combo), " #  >>>>>    New Selection (2) !"
     global choice2
     choice2 = cbox2.get()
@@ -3162,10 +3158,10 @@ def from_file_get_stats(choice): # Counter @ summary functions
     #for i in theFilenames1:
     #print str(choice) # _name_ac1.txt
     #print type(choice) # unicode
-    print '\nReading tab file -----------------------------------------------'
+    print ('\nReading tab file -----------------------------------------------')
     filename = choice
     prot_data, fields = readUniProtTab_sum(filename,n=0, with_fields=True)
-    print '\nThere are', len(prot_data), 'proteins in file', filename,"\n#####################################################\n"
+    print ('\nThere are', len(prot_data), 'proteins in file', filename,"\n#####################################################\n")
 
 
 
@@ -3211,9 +3207,9 @@ frm8.pack()#frm.pack(side=LEFT)
 #theFilenames1
 
 def get_gene_lists():
-
     for i in theInputFiles:
-        print i
+        print (i)
+        
 def get_interpro2go_domains():
 
     # http://sebastianraschka.com/Articles/2014_scikit_dataprocessing.html
@@ -3286,7 +3282,7 @@ def venn3(thefiles):
     for i in range(len(thefiles[:3])):
         if len(thefiles[i]) > 1:
             vars[i] = thefiles[i]
-            print i, vars[i]
+            print (i, vars[i])
         count += 1
     #theOutput = str(raw_input("Save file as : ")+"_merged.txt")
     get_domain_venn_diagram1(vars[0], vars[1], vars[2])
@@ -3302,7 +3298,7 @@ def venn3(thefiles):
 def togglex():
     if bt20.visible:
         btnTogglix["text"] = "Show "
-        print "Now u don't"
+        print ("Now u don't")
         #mybutton.grid_remove()
         bt20.grid_remove()
         bt21.grid_remove()
@@ -3383,7 +3379,7 @@ def togglex():
 
        
 
-        print "Now usee it"
+        print ("Now usee it")
         btnTogglix["text"] = "Hide "
     #mybutton.visible = not mybutton.visible
     bt20.visible = not bt20.visible
@@ -3395,14 +3391,14 @@ def togglixx():
     if bt20.visible:
         bt20.withdraw()
         btnTogglix["text"] = "Show "
-        print "Now u don't"
+        print ("Now u don't")
     
     else:
 
         
         #def show():
         btnTogglix["text"] = "Hide "
-        print "u see it"
+        print ("u see it")
         bt20.update()
         bt20.deiconify()
 

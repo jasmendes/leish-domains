@@ -176,7 +176,7 @@ def get_tax_data(taxid):
 
 def from_name_get_tax_id(species_list):
 
-    print "\nSearching Taxonomic name . . . "
+    print ("\nSearching Taxonomic name . . . ")
     #mail = raw_input("Enter email address : ")
     #while len(mail.strip().split("@")) != 2:
     #    mail = raw_input("Please Enter email address : ")
@@ -193,27 +193,27 @@ def from_name_get_tax_id(species_list):
     print('parsing taxonomic data...\n') # message declaring the parser has begun
 
     if species_list == []:
-        print "INFO:\nUse text box to Enter a list of tax names and click ready, then use tax name button. "
+        print ("INFO:\nUse text box to Enter a list of tax names and click ready, then use tax name button. ")
         return 
 
     for species in species_list:
         print ('\t> '+species) # progress messages
         taxid = get_tax_id(species) # Apply your functions
-        print "Specie Name : ",species,"\tTax ID : ", taxid
+        print ("Specie Name : ",species,"\tTax ID : ", taxid)
         data = get_tax_data(taxid)
         #print species, data
         lineage = {d['Rank']:d['ScientificName'] for d in data[0]['LineageEx'] if d['Rank'] in ['phylum']}
-        print species, lineage
+        print (species, lineage)
 
         reply = raw_input("Show more info ? (Y/N) : ")
         if reply == "Y":
-            print species, "\n",data
+            print (species, "\n",data)
         elif reply == "y":
-            print species, "\n",data
+            print (species, "\n",data)
         elif reply == "yes":
-            print species, "\n",data
+            print (species, "\n",data)
         else:
-            print "Thanks"
+            print ("Thanks")
             
         taxid_list.append(taxid) # Append the data to lists already initiated
         data_list.append(data)
@@ -260,33 +260,33 @@ def from_tax_id_get_bs_uniprot(tax_id):
         ### SEARCH BY TAX_ID 
         u = UniProt(verbose=False)
         # print dir(u)
-        print """Database: Bioservices - UniProt
+        print ("""Database: Bioservices - UniProt
         Columns:
         Correct values are ['citation', 'clusters', 'comments', 'database', 'domains', 'domain', 'ec', 'id', 'entry name',
         'existence', 'families', 'features', 'genes', 'go', 'go-id', 'interpro', 'interactor', 'keywords', 'keyword-id',
         'last-modified', 'length', 'organism', 'organism-id', 'pathway', 'protein names', 'reviewed', 'score', 'sequence', '3d',
-        'subcellular locations', 'taxonomy', 'tools', 'version', 'virus hosts']"""
+        'subcellular locations', 'taxonomy', 'tools', 'version', 'virus hosts']""")
         data = u.search("taxonomy:"+str(tax_id), frmt="tab", limit=1000000000, columns="id, entry name, protein names, interpro, go-id, go, genes,ec , pathway, subcellular locations, existence, organism, organism-id")
         res = data.split("\n")
-        print "\n[1] Taxonomy Filter \n", data.split("\t")[0], tax_id
+        print ("\n[1] Taxonomy Filter \n", data.split("\t")[0], tax_id)
         
         for i in res[0:10]:
-            print i
+            print (i)
         dig  = (random.randint(0,1000))
             
-        print "Proteins found : ", len(res)-3
+        print ("Proteins found : ", len(res)-3)
         aFile = open("output\\tax"+str(tax_id)+"_"+str(dig)+"_bs_uniprot.txt", "wt") #"_ac_entry_ipr_name_gene_go_path_local_exi.txt", "wt")
         aFile.write(data)
         aFile.close()
-        print aFile, " saved!"
+        print (aFile, " saved!")
         theInputFiles.append(aFile.name)
-        print theInputFiles
-        print "\n\tBioservices - UniProt Access TAX - DONE!\n"
+        print (theInputFiles)
+        print ("\n\tBioservices - UniProt Access TAX - DONE!\n")
 
         Freq = 1000 # Set Frequency To 2500 Hertz
         Dur = 100 # Set Duration To 1000 ms == 1 second
         winsound.Beep(Freq,Dur)
-        print "(complete!)"
+        print ("(complete!)")
         
         time_end = datetime.datetime.fromtimestamp(time.time())
         print("Time elapsed: ", str(time_end - time_begin))
@@ -304,12 +304,12 @@ def from_uni_id_get_bs_uniprot1(uni_ids):
 
         from bioservices import UniProt
         u = UniProt(verbose=False)
-        print """
+        print ("""
         Database: Bioservices - UniProt
         Correct values are ['citation', 'clusters', 'comments', 'database', 'domains', 'domain', 'ec', 'id', 'entry name',
         'existence', 'families', 'features', 'genes', 'go', 'go-id', 'interpro', 'interactor', 'keywords', 'keyword-id',
         'last-modified', 'length', 'organism', 'organism-id', 'pathway', 'protein names', 'reviewed', 'score', 'sequence', '3d',
-        'subcellular locations', 'taxonomy', 'tools', 'version', 'virus hosts']"""
+        'subcellular locations', 'taxonomy', 'tools', 'version', 'virus hosts']""")
     
         #s = ",".join(uni_ids)
         count = 0
@@ -320,7 +320,7 @@ def from_uni_id_get_bs_uniprot1(uni_ids):
             data = u.search(i, frmt="tab", limit=1000000000, columns="id,  protein names, interpro, domain, domains, go-id, go, genes,ec , pathway, subcellular locations, existence, organism, organism-id")#" organism-id, entry name, id, protein names, interpro,  genes, go-id, go,  pathway, subcellular locations, existence, organism") # limit seacrh (2march2015) =153
             #print help(data)
             res1 = data.split("\n")
-            print count, i
+            print (count, i)
             if count == 0:
                 for i in res1[:-1]:
                     #print i
@@ -337,9 +337,9 @@ def from_uni_id_get_bs_uniprot1(uni_ids):
 
         
             
-        print "Proteins found : ", count-1
+        print ("Proteins found : ", count-1)
         aFile.close()
-        print aFile, " saved!"
+        print (aFile, " saved!")
         theInputFiles.append(aFile.name)
 
         # WITH UNI ID GET TAX ID PROTEINS
@@ -360,12 +360,12 @@ def from_uni_id_get_bs_uniprot1(uni_ids):
 
         #match_uni_ids_from_list(uni_ids, thefilename.name)
         
-        print "\n\tBioservices - UniProt Access ACS - DONE!\n"
+        print ("\n\tBioservices - UniProt Access ACS - DONE!\n")
         
         Freq = 1000 # Set Frequency To 2500 Hertz
         Dur = 100 # Set Duration To 1000 ms == 1 second
         winsound.Beep(Freq,Dur)
-        print "(complete!)"
+        print ("(complete!)")
 
         time_end = datetime.datetime.fromtimestamp(time.time())
         print("Time elapsed: ", str(time_end - time_begin))
@@ -385,12 +385,12 @@ def from_gene_id_get_bs_uniprot1(gene_ids):
 
         from bioservices import UniProt
         u = UniProt(verbose=False)
-        print """
+        print ^("""
         Database: Bioservices - UniProt
         Correct values are ['citation', 'clusters', 'comments', 'database', 'domains', 'domain', 'ec', 'id', 'entry name',
         'existence', 'families', 'features', 'genes', 'go', 'go-id', 'interpro', 'interactor', 'keywords', 'keyword-id',
         'last-modified', 'length', 'organism', 'organism-id', 'pathway', 'protein names', 'reviewed', 'score', 'sequence', '3d',
-        'subcellular locations', 'taxonomy', 'tools', 'version', 'virus hosts']"""
+        'subcellular locations', 'taxonomy', 'tools', 'version', 'virus hosts']""")
     
         #s = ",".join(uni_ids)
         count = 0
@@ -401,7 +401,7 @@ def from_gene_id_get_bs_uniprot1(gene_ids):
             data = u.search(i, frmt="tab", limit=1000000000, columns="id,  protein names, interpro, domain, domains, go-id, go, genes,ec , pathway, subcellular locations, existence, organism, organism-id")#" organism-id, entry name, id, protein names, interpro,  genes, go-id, go,  pathway, subcellular locations, existence, organism") # limit seacrh (2march2015) =153
             #print help(data)
             res1 = data.split("\n")
-            print count, i
+            print (count, i)
             if count == 0:
                 for i in res1[:-1]:
                     #print i
@@ -418,9 +418,9 @@ def from_gene_id_get_bs_uniprot1(gene_ids):
 
         
             
-        print "Proteins found : ", count-1
+        print ("Proteins found : ", count-1)
         aFile.close()
-        print aFile, " saved!"
+        print (aFile, " saved!")
         theInputFiles.append(aFile.name)
 
         # WITH UNI ID GET TAX ID PROTEINS
@@ -441,12 +441,12 @@ def from_gene_id_get_bs_uniprot1(gene_ids):
 
         #match_uni_ids_from_list(uni_ids, thefilename.name)
         
-        print "\n\tBioservices - UniProt Access ACS - DONE!\n"
+        print ("\n\tBioservices - UniProt Access ACS - DONE!\n")
         
         Freq = 1000 # Set Frequency To 2500 Hertz
         Dur = 100 # Set Duration To 1000 ms == 1 second
         winsound.Beep(Freq,Dur)
-        print "(complete!)"
+        print ("(complete!)")
 
         time_end = datetime.datetime.fromtimestamp(time.time())
         print("Time elapsed: ", str(time_end - time_begin))
@@ -471,7 +471,7 @@ def search_protein_name_in_org_bs_uniprot():
     # print "Accession via entry name (e.g., ZAP70_HUMAN) is faster than by Entry (e.g., P43403)"
     # theTerms0 = "ec:1.2.1.18 reviewed:no AND human\n"
     theTerms0 = 'zap70+AND+organism:9606'
-    print "Example: ", theTerms0
+    print ("Example: ", theTerms0)
     theTerms = raw_input("Enter terms to find in organisms : ")
     data1 = u.search(str(theTerms), frmt="tab", limit=10000000, columns="id,entry name,protein names, genes,go-id,go,length,organism,organism-id")
     res1 = data1.split("\n")
@@ -480,15 +480,15 @@ def search_protein_name_in_org_bs_uniprot():
     aFile = open("output\\"+str(theTerms[0])+"_ac_names_len_genes_go_organism.txt", "wt")
     count = 0
     for i in res1:
-            print i
+            print (i)
             aFile.write(i+"\n")
             count += 1
-    print "Proteins found : ", count-2
+    print ("Proteins found : ", count-2)
     aFile.close()
-    print aFile, " saved!"
+    print (aFile, " saved!")
     theInputFiles.append(aFile.name)
     
-    print "\n\tBioservices - UniProt Access NAME - DONE!\n"
+    print ("\n\tBioservices - UniProt Access NAME - DONE!\n")
     ############################################################################
 
 #search_protein_name_in_org_bs_uniprot()
@@ -511,7 +511,7 @@ def from_seq_get_bs_uniprot():
         'organism-id', 'pathway', 'protein names', 'reviewed', 'score', 'sequence', '3d', 'subcellular locations', 'taxonomy', 'tools', 'version',
         'virus hosts']"""
     theSeq0 = "MITIDGNGAVASVAFRTSEVIAIYPITPSSTMAEQADAWAGNGLKNVWGDTPRVVEMQSEAGAIATVHGALQTGALSTSFTSSQGLLLMIPTLYKLAGELTPFVLHVAARTVATHALSIFGDHSDVMAVRQTGCAMLCAANVQEAQDFALISQIATLKSRVPFIHFFDGFRTSHEINKIVPLADDTILDLMPQVEIDAHRARALNPEHPVIRGTSANPDTYFQSREATNPWYNAVYDHVEQAMNDFSAATGRQYQPFEYYGHPQAERVIILMGSAIGTCEEVVDELLTRGEKVGVLKVRLYRPFSAKHLLQALPGSVRSVAVLDRTKEPGAQAEPLYLDVMTALAEAFNNGERETLPRVIGGRYGLSSKEFGPDCVLAVFAELNAAKPKARFTVGIYDDVTNLSLPLPENTLPNSAKLEALFYGLGSDGSVSATKNNIKIIGNSTPWYAQGYFVYDSKKAGGLTVSHLRVSEQPIRSAYLISQADFVGCHQLQFIDKYQMAERLKPGGIFLLNTPYSADEVWSRLPQEVQAVLNQKKARFYVINAAKIARECGLAARINTVMQMAFFHLTQILPGDSALAELQGAIAKSYSSKGQDLVERNWQALALARESVEEVPLQPVNPHSANRPPVVSDAAPDFVKTVTAAMLAGLGDALPVSALPPDGTWPMGTTRWEKRNIAEEIPIWKEELCTQCNHCVAACPHSAIRAKVVPPEAMENAPASLHSLDVKSRDMRGQKYVLQVAPEDCTGCNLCVEVCPAKDRQNPEIKAINMMSRLEHVEEEKINYDFFLNLPEIDRSKLERIDIRTSQLITPLFEYSGACSGCGETPYIKLLTQLYGDRMLIANATGCSSIYGGNLPSTPYTTDANGRGPAWANSLFEDNAEFGLGFRLTVDQHRVRVLRLLDQFADKIPAELLTALKSDATPEVRREQVAALRQQLNDVAEAHELLRDADALVEKSIWLIGGDGWAYDIGFGGLDHVLSLTENVNILVLDTQCYSNTGGQASKATPLGAVTKFGEHGKRKARKDLGVSMMMYGHVYVAQISLGAQLNQTVKAIQEAEAYPGPSLIIAYSPCEEHGYDLALSHDQMRQLTATGFWPLYRFDPRRADEGKLPLALDSRPPSEAPEETLLHEQRFRRLNSQQPEVAEQLWKDAAADLQKRYDFLAQMAGKAEKSNTD"
-    print "Example : \n", theSeq0
+    print ("Example : \n", theSeq0)
     theSeq = raw_input("\nEnter sequence : ")
     data1 = u.search(str(theSeq), frmt="tab", limit=100000000, columns="id,protein names, database,sequence")
     res1 = data1.split("\n")
@@ -519,13 +519,13 @@ def from_seq_get_bs_uniprot():
     aFile = open("output\\seq_ac_names_len_genes_go_organism.txt", "wt")
     count = 0
     for i in res1:
-            print i
+            print (i)
             aFile.write(i+"\n")
             count += 1
-    print "Proteins found : ", count
+    print ("Proteins found : ", count)
     aFile.close()
-    print aFile, " saved!"
-    print "\n\tBioservices - UniProt Access SEQ - DONE!\n"
+    print (aFile, " saved!")
+    print ("\n\tBioservices - UniProt Access SEQ - DONE!\n")
     
     ############################################################################
 
@@ -580,7 +580,7 @@ def file2list(theFilename):
     go_terms = []
     go_roots = []
     for i in aFile.readlines()[1:]:
-        print i
+        print (i)
         ac = i.strip.split("\t")[0]
         if ac not in acs:
             acs.append(ac)
@@ -670,7 +670,7 @@ def from_tax_id_get_bs_interpro2go(tax_id):
         s = BioMart(verbose=False)
         # s.lookfor("interpro")#Candidate
         # s.datasets("prod-intermart_1")
-        print "\nExpected time = 2 min \n" #  1 min 45 sec
+        print ("\nExpected time = 2 min \n") #  1 min 45 sec)
         #xmlq = s.biomartQuery.get_xml()
         #res = s.query(xmlq)
         """
@@ -745,8 +745,9 @@ def from_tax_id_get_bs_interpro2go(tax_id):
 
         header ="protein accession\tsupermatch entry ac\tsupermatch entry name\tprotein database name\ttaxonomy scientific name\n"
         bottom =  "# Biomart Query Hits: %s \nTaxonomic ID : %s"  % (len(res), tax_id) # "%s=%s" % (k, v)
-        print header
-        for i in res[0:10]: print i
+        print (header)
+        for i in res[0:10]:
+            print (i)
         aFile = open("output\\tax"+str(tax_id)+"_bmq_ac_ipr.txt", "wt")#YOUR FILENAME
         aFile.write(header)
 
@@ -780,29 +781,29 @@ def from_tax_id_get_bs_interpro2go(tax_id):
 
         from collections import Counter
         c = Counter(accs)
-        print "\nTOTAL ACS found : ", len(accs) # 6597
-        print "UNIQUE ACS : ", len(c), "\n", c.most_common(10) # 2088
+        print ("\nTOTAL ACS found : ", len(accs)) # 6597
+        print ("UNIQUE ACS : ", len(c), "\n", c.most_common(10)) # 2088
         for i in dict(c.most_common(10)):
-            print i, c[i]
+            print (i, c[i])
 
         d  = Counter(ipprs)
-        print "\nTOTAL IPRs found : ", len(ipprs) # 6597
-        print "UNIQUE IPRs : ", len(d), "\n", d.most_common(10) # 3606
+        print ("\nTOTAL IPRs found : ", len(ipprs)) # 6597
+        print ("UNIQUE IPRs : ", len(d), "\n", d.most_common(10)) # 3606
         for i in dict(d.most_common(10)):
-            print i, d[i]
+            print (i, d[i])
 
         e  = Counter(ippr_names)
-        print "\nTOTAL IPRs NAMES found : ", len(ippr_names) # 6597
-        print "UNIQUE IPR NAMES : ", len(e), "\n", e.most_common(10) # 3606
+        print ("\nTOTAL IPRs NAMES found : ", len(ippr_names)) # 6597
+        print ("UNIQUE IPR NAMES : ", len(e), "\n", e.most_common(10)) # 3606
         for i in dict(e.most_common(10)):
-            print i, e[i]
+            print (i, e[i])
 
-        print bottom
+        print (bottom)
 
         aFile.close()
-        print "BioServices - InterPro by TAX ID| Hits : " ,len(res)
+        print ("BioServices - InterPro by TAX ID| Hits : " ,len(res))
 
-        print aFile, " saved!"
+        print (aFile, " saved!")
         #theInputFiles.append(aFile.name)
         
         #def access_interpro2go_with_biomart():
@@ -897,15 +898,15 @@ def from_tax_id_get_bs_interpro2go(tax_id):
         res2 = res2.split("\n") # TOTAL = 42128, 62706(6out)
         header22 ="""entry_id\tentry_name\tentry_type\tgo_id\tgo_term_name\tgo_root_name\n"""
 
-        print header22
-        for i in res2[0:10]: print i
+        print (header22)
+        for i in res2[0:10]: print (i)
         bFile = open("output\\bmq_ipr_go_"+str(len(res2))+".txt", "wt")
         bFile.write(str(header22))
         for aLine in res2:
                 bFile.writelines(aLine+"\n")
         bFile.close()
-        print  """Biomart Query | Hits : """, str(len(res2))
-        print bFile, " saved!"
+        print  ("""Biomart Query | Hits : """, str(len(res2)))
+        print (bFile, " saved!")
         
         #match_ac2_ipr2go(tax_id)
         #########
@@ -986,18 +987,18 @@ def from_tax_id_get_bs_interpro2go(tax_id):
                         #print "oi"
                         #print "Bioservices - InterPro - MERGE taxid2ipr2go - DONE!"
 
-        print "\nTOTAL Proteins : ", len(acss)
-        print "TOTAL IPR append :", count1
-        print "TOTAL IPR not append : ", count2
-        print "TOTAL IPRS in List : ", count1+count2
-        print "Unique IPRS in List 1 and  2 : ", len(ipr_dict1.keys()),  len(ipr_dict2.keys())
-        print "\n\tBioservices - InterPro - ACCESS AC2IPR2GO -  DONE!\n" # time = 1min 45 sec
-        print cf, " saved!"
+        print ("\nTOTAL Proteins : ", len(acss))
+        print ("TOTAL IPR append :", count1)
+        print ("TOTAL IPR not append : ", count2)
+        print ("TOTAL IPRS in List : ", count1+count2)
+        print ("Unique IPRS in List 1 and  2 : ", len(ipr_dict1.keys()),  len(ipr_dict2.keys()))
+        print ("\n\tBioservices - InterPro - ACCESS AC2IPR2GO -  DONE!\n") # time = 1min 45 sec
+        print (cf, " saved!")
         theInputFiles.append(cf.name)
         Freq = 1000 # Set Frequency To 2500 Hertz
         Dur = 100 # Set Duration To 1000 ms == 1 second
         winsound.Beep(Freq,Dur)
-        print "(complete!)"
+        print ("(complete!)")
         
         time_end = datetime.datetime.fromtimestamp(time.time())
         print("Time elapsed: ", str(time_end - time_begin))
@@ -1043,7 +1044,7 @@ def from_uni_id_get_bs_ac2ipr2go(uni_ids):
         s = BioMart(verbose=False)
         # s.lookfor("interpro")#Candidate
         # s.datasets("prod-intermart_1")
-        print "shadow"
+        print ("shadow")
         #xmlq = s.biomartQuery.get_xml()
         #res = s.query(xmlq)
         """
@@ -1118,7 +1119,7 @@ def from_uni_id_get_bs_ac2ipr2go(uni_ids):
         ### s.add_filter_to_xml("protein_length_greater_than", 1000)
 
         header = """protein_accession\tprotein_name\tentry_ac\tentry_name\tentry type\tgo_id\tgo_term\tgo_root\tprotein_database_name\ttax_name\ttax_id\n"""
-        print header
+        print (header)
         name = random.choice(uni_ids)
         aFile1 = open("output\\"+str(name)+"_"+str(len(uni_ids))+"_bs_biomart.txt", "wt") # +str(uni_ids[0])+"_bmq_ac_ipr_go_db.txt", "wt")#YOUR FILENAME
         aFile1.write(str(header))
@@ -1161,15 +1162,15 @@ def from_uni_id_get_bs_ac2ipr2go(uni_ids):
                         continue
                     
         #res = res.split("\n") # TOTAL = 22262, 22288(6out)
-        for i in res[0:10]: print i
+        for i in res[0:10]: print (i)
 
         aFile1.close()
-        print "Total Ids for query : ", len(uni_ids) # 16
-        print "BioServices - InterPro by UNI ID | match : " ,len(acs_yes) # count2 # 34, 52, 43
-        print "BioServices - InterPro by UNI ID | no match : " , len(acs_no) # count1 # 9
-        print "Coverage ", len(acs_no)/float(len(acs_yes))
+        print ("Total Ids for query : ", len(uni_ids)) # 16
+        print ("BioServices - InterPro by UNI ID | match : " ,len(acs_yes)) # count2 # 34, 52, 43
+        print ("BioServices - InterPro by UNI ID | no match : " , len(acs_no)) # count1 # 9
+        print ("Coverage ", len(acs_no)/float(len(acs_yes)))
 
-        print aFile1, " saved!"
+        print (aFile1, " saved!")
 
         # WITH UNI ID GET TAX ID PROTEINS
 
@@ -1196,13 +1197,13 @@ def from_uni_id_get_bs_ac2ipr2go(uni_ids):
         #theInputFiles.append(allf)
         
 
-        print "\n\tBioservices - InterPro - ACCESS AC2IPR2GO -  DONE!\n"
+        print ("\n\tBioservices - InterPro - ACCESS AC2IPR2GO -  DONE!\n")
         
         theInputFiles.append(aFile1.name)
         Freq = 1000 # Set Frequency To 2500 Hertz
         Dur = 100 # Set Duration To 1000 ms == 1 second
         winsound.Beep(Freq,Dur)
-        print "(complete!)"
+        print ("(complete!)")
         
         time_end = datetime.datetime.fromtimestamp(time.time())
         print("Time elapsed: ", str(time_end - time_begin))
@@ -1227,7 +1228,7 @@ def match_2_files():
 
 def from_uni_get_protein_tax(uni_ids):
     for i in uni_ids:
-        print i
+        print (i)
 
     
 
@@ -1325,15 +1326,15 @@ def from_ipr_id_get_bs_ipr2go(ipr_ids):
         res2 = s.query(xml_query)
         res2 = res2.split("\n") # TOTAL = 42128, 62706(6out)
         header2 = """entry_id\tentry_name\tentry type\tgo_id\tgo_term_name\tgo_root_name\n"""
-        print header2
-        for i in res2[0:50]: print i
+        print (header2)
+        for i in res2[0:50]: print (i)
         bFile = open("_bmq_ipr_go.txt", "wt")
         bFile.write(str(header2))
         for aLine in res2:
                 bFile.writelines(aLine+"\n")
         bFile.close()
-        print """Biomart Query | Hits : """ , str(len(res2))
-        print bFile, " saved!\n"
+        print ("""Biomart Query | Hits : """ , str(len(res2)))
+        print (bFile, " saved!\n")
         #########
         """('Biomart Query\n        InterPro ID List \n
         BioServices - InterPro | Hits :  22288
@@ -1372,7 +1373,7 @@ def from_ipr_id_get_bs_ipr2go(ipr_ids):
                         # d[value].append(value)
                         #result=dict_iprs[i]
                         #"\t".join(result)
-                        print i,dict_iprs[i]
+                        print (i,dict_iprs[i])
                         cf.write(i+"\t"+str(dict_iprs[i])+"\n")
                         #del result [:]
                 else:
@@ -1380,16 +1381,16 @@ def from_ipr_id_get_bs_ipr2go(ipr_ids):
                         #print i1
                         count2 += 1
                         #print "hello"
-        print  count1 , "/", count2, count1 + count2
-        print cf, " saved!"
+        print  (count1 , "/", count2, count1 + count2)
+        print (cf, " saved!")
         theInputFiles.append(cf.name)
 
-        print "Bioservices  InterPro2GO - MATCH IPR2GO - DONE!"
+        print ("Bioservices  InterPro2GO - MATCH IPR2GO - DONE!")
         
         Freq = 1000 # Set Frequency To 2500 Hertz
         Dur = 100 # Set Duration To 1000 ms == 1 second
         winsound.Beep(Freq,Dur)
-        print "(complete!)"
+        print ("(complete!)")
        
 
 #ipr_ids = ["IPR024897", "IPR020605"]
@@ -1425,17 +1426,17 @@ def from_tax_id_get_quickgo(tax_id):
             count += 1
         aFile.close()
         for i in aGoList[0:10]:
-            print i
+            print (i)
 
-        print "Proteins found for this TAX ",tax_id," : ", count
-        print "\nBioservices - QuickGO - ACCESS TAX - DONE!"
-        print aFile , "is saved!"
+        print ("Proteins found for this TAX ",tax_id," : ", count)
+        print ("\nBioservices - QuickGO - ACCESS TAX - DONE!")
+        print (aFile , "is saved!")
         theInputFiles.append(aFile.name)
         
         Freq = 1000 # Set Frequency To 2500 Hertz
         Dur = 100 # Set Duration To 1000 ms == 1 second
         winsound.Beep(Freq,Dur)
-        print "(complete!)"
+        print ("(complete!)")
         
 
 #ids = ["5671"," "]
@@ -1470,15 +1471,15 @@ def from_uni_ids_get_quickgo(uni_ids):
                             aFile.write( str(aLine)+"\n")
                             
         aFile.close()
-        print "\nBioservices - QuickGO - ACCESS ACS - DONE!"
-        print "Proteins found for this AC List:", count
-        print aFile , "is saved!"
+        print ("\nBioservices - QuickGO - ACCESS ACS - DONE!")
+        print ("Proteins found for this AC List:", count)
+        print (aFile , "is saved!")
         theInputFiles.append(aFile.name)
 
         Freq = 1000 # Set Frequency To 2500 Hertz
         Dur = 100 # Set Duration To 1000 ms == 1 second
         winsound.Beep(Freq,Dur)
-        print "(complete!)"
+        print ("(complete!)")
         
 
 # ids = ["P12345","P12346"]
@@ -1510,15 +1511,15 @@ def from_go_ids_get_quickgo(go_ids):
                         aFile.write( str(aLine)+"\n")
                         count += 1
         aFile.close()
-        print "\nBioservices - QuickGO - ACCESS GOS - DONE!"        
-        print "Proteins found for this GO term:", count
-        print aFile , " is saved!"
+        print ("\nBioservices - QuickGO - ACCESS GOS - DONE!"        )
+        print ("Proteins found for this GO term:", count)
+        print (aFile , " is saved!")
         
         theInputFiles.append(aFile.name)
         Freq = 1000 # Set Frequency To 2500 Hertz
         Dur = 100 # Set Duration To 1000 ms == 1 second
         winsound.Beep(Freq,Dur)
-        print "(complete!)"
+        print ("(complete!)")
 
 # ids = ["GO:0008270"," "]
 # from_go_ids_get_quickgo(ids)
@@ -1538,7 +1539,7 @@ def from_go_ids_get_quickgo_in_specie(go_ids):
     # découpage dans un array
     res = re.split("\n", res)
 
-    print len(res)
+    print (len(res))
     # 10002
     # le premier élément contient l'entête
     # le dernier élément est vide
@@ -1549,18 +1550,18 @@ def from_go_ids_get_quickgo_in_specie(go_ids):
         # afficher les lignes pour UniProtKB
         if re.match('UniProtKB', cols[0]):
             proteins.append(cols[1])
-            print r
+            print (r)
 
-    print len(proteins)
+    print (len(proteins))
     # 10000 protéines UniProtKB
 
     #sys.exit(0)
-    print "BIOSERVICES - Quick GO DONE!"
+    print ("BIOSERVICES - Quick GO DONE!")
     theInputFiles.append(aFile.name)
     Freq = 1000 # Set Frequency To 2500 Hertz
     Dur = 100 # Set Duration To 1000 ms == 1 second
     winsound.Beep(Freq,Dur)
-    print "(complete!)"
+    print ("(complete!)")
 
 #ids = ["GO:0006915"]
 #from_go_ids_get_quickgo_in_specie(ids)
@@ -1584,7 +1585,7 @@ def from_uni_ids_get_kegg_paths(uni_ids):
     # KEGG ID : hsa1234
     # PATHWAY : hsa12345    
 
-    print "\n\tKEGG  -  Look for relevant Pathways, using ac. . . "
+    print ("\n\tKEGG  -  Look for relevant Pathways, using ac. . . ")
 
     from bioservices.uniprot import UniProt
     u = UniProt(verbose=False)
@@ -1601,10 +1602,10 @@ def from_uni_ids_get_kegg_paths(uni_ids):
     expected_wait = len(uni_ids)*one_wait
     x = (expected_wait)/60
     g = float("{0:.1f}".format(x))
-    print "\nTotal ids: ",len(uni_ids)," >>>  Expected job time  : ", g, " minutes. . . "
+    print ("\nTotal ids: ",len(uni_ids)," >>>  Expected job time  : ", g, " minutes. . . ")
     for uni_id in uni_ids:
         
-        print "\n  Mapping ACC to KEGG ID . . . "
+        print ("\n  Mapping ACC to KEGG ID . . . ")
         map1  = u.mapping(fr="ACC+ID", to="KEGG_ID", query=str(uni_id)) # AC
         #print len(map1), map1 # 1 defaultdict(<type 'list'>, {u'P43403': [u'hsa:7535']})
         for genes in map1.values():
@@ -1628,7 +1629,7 @@ def from_uni_ids_get_kegg_paths(uni_ids):
         get_pname = k.find(str(k_organism), str(kegg_id))
         get_pname = str(get_pname) # NAMES
 
-        print count , uni_id, " > ",get_pname[:-1] # lif:LINJ_14_0700	putative fatty acid elongase (EC:2.3.1.119)
+        print (count , uni_id, " > ",get_pname[:-1]) # lif:LINJ_14_0700	putative fatty acid elongase (EC:2.3.1.119)
         
             
 
