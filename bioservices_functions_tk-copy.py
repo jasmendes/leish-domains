@@ -2008,7 +2008,7 @@ def from_uni_ids_get_kegg_path_marker(uni_ids):
     Freq = 1000 # Set Frequency To 2500 Hertz
     Dur = 100 # Set Duration To 1000 ms == 1 second
     winsound.Beep(Freq,Dur)
-    print ("(complete!)")
+    print "(complete!)"
 
 
 #uni_ids = ["A4HVU4","A4I2W5"] # ["A4I0R1","A4HYI9"] #"A4I5T4","A4I0N4"]#"A4I9M5","A4HVK7","E9AHP1","A4HZH7","A4I8Y5","E9AI05","A4HRR9","A4I5T4","A4I0N4","A4I9M5","A4HVK7","E9AHP1","A4HZH7","A4I8Y5","E9AI05","A4HRR9"]
@@ -2031,33 +2031,33 @@ def from_uni_id_get_kegg_orthologues(uni_id):
 
     k = KEGG(verbose=False)
 
-    print ("\nFrom gene get kegg orthologues . . . ")
+    print "\nFrom gene get kegg orthologues . . . "
 
     from bioservices.uniprot import UniProt
     u = UniProt(verbose=False)
 
     kegg_ids = []
-    print ("Mapping protein ac to kegg ID. . . ")
+    print "Mapping protein ac to kegg ID. . . "
     # http://pythonhosted.org/bioservices/convertor_tutorial.html
     map1  = u.mapping(fr="ACC+ID", to="KEGG_ID", query=str(uni_id))# P_ENTREZGENEID, "UNIGENE_ID, EMBL,GeneID
-    print (map1) # defaultdict(<type 'list'>, {u'P43403': [u'hsa:7535']})
+    print map1 # defaultdict(<type 'list'>, {u'P43403': [u'hsa:7535']})
 
     for i in map1.values():
         i = str(i)
         kegg_id = i[3:-2]
         _id = i[7:-2]
-        print (_id) # LINJ_10_0520
-        print (i, " = ", kegg_id) # [u'lif:LINJ_10_0520'] = lif:LINJ_10_0520
+        print _id # LINJ_10_0520
+        print i, " = ", kegg_id # [u'lif:LINJ_10_0520'] = lif:LINJ_10_0520
         k_organism = i[3:6] # 'lif'
-        print (k_organism)
+        print k_organism
         kegg_ids.append(kegg_id)
-    print (k.get(str(kegg_id)))
+    print k.get(str(kegg_id))
     get_kegg = k.get(str(kegg_id))
 
-    print ("\nOpening page in browser . . .")    
+    print "\nOpening page in browser . . ."    
     webbrowser.open("http://www.kegg.jp/ssdb-bin/ssdb_best?org_gene="+str(kegg_id))
 
-    print ("BioServices - KEGG access DONE!")
+    print "BioServices - KEGG access DONE!"
     
 
 #ids = ["A4HUD2","A4HUD4"] 
@@ -2082,43 +2082,43 @@ def from_gene_id_get_kegg_orthologues(gene_id):
 
     k = KEGG(verbose=False)
 
-    print ("\nFrom gene get kegg orthologues . . . ")
+    print "\nFrom gene get kegg orthologues . . . "
 
-    print ("Mapping gene to protein ac . . . ")
+    print "Mapping gene to protein ac . . . "
     u = UniProt()
     res = u.search(str(gene_id), frmt="tab", columns="genes, id")
     for i in res.split("\n"):
-        print (i)
+        print i
         while len(i.split("\t")) > 1 :
             i = i.split()[-1]
             #print i
             if i[0] in letters and i[1] in numbers and i[-1] in numbers:
-                print (i)
+                print i
                 uni_id = i
 
     kegg_ids = []
 
-    print ("Mapping protein ac to kegg ID. . . ")
+    print "Mapping protein ac to kegg ID. . . "
     # http://pythonhosted.org/bioservices/convertor_tutorial.html
     map1  = u.mapping(fr="ACC+ID", to="KEGG_ID", query=str(uni_id))# P_ENTREZGENEID, "UNIGENE_ID, EMBL,GeneID
-    print (map1) # defaultdict(<type 'list'>, {u'P43403': [u'hsa:7535']})
+    print map1 # defaultdict(<type 'list'>, {u'P43403': [u'hsa:7535']})
 
     for i in map1.values():
         i = str(i)
         kegg_id = i[3:-2]
         _id = i[7:-2]
-        print (_id) # LINJ_10_0520
-        print (i, " = ", kegg_id) # [u'lif:LINJ_10_0520'] = lif:LINJ_10_0520
+        print _id # LINJ_10_0520
+        print i, " = ", kegg_id # [u'lif:LINJ_10_0520'] = lif:LINJ_10_0520
         k_organism = i[3:6] # 'lif'
-        print (k_organism)
+        print k_organism
         kegg_ids.append(kegg_id)
-    print (k.get(str(kegg_id)))
+    print k.get(str(kegg_id))
     get_kegg = k.get(str(kegg_id))
 
-    print ("\nOpening page in browser . . ."    )
+    print "\nOpening page in browser . . ."    
     webbrowser.open("http://www.kegg.jp/ssdb-bin/ssdb_best?org_gene="+str(kegg_id))
 
-    print ("BioServices - KEGG access DONE!")
+    print "BioServices - KEGG access DONE!"
 
 #ids = ["LINJ_10_0240","LINJ_10_0520"] 
 #for i in ids:
@@ -2134,11 +2134,11 @@ def from_uni_id_get_kegg_spot(uni_id):
     # KEGG ID : hsa1234
     # PATHWAY : hsa12345    
 
-    print ("\n\tKEGG  -  Look for relevante Pathways, using ac. . . ")
+    print "\n\tKEGG  -  Look for relevante Pathways, using ac. . . "
     from bioservices.uniprot import UniProt
     u = UniProt(verbose=False)
     map1  = u.mapping(fr="ACC", to="KEGG_ID", query=str(uni_id))
-    print (map1) # defaultdict(<type 'list'>, {u'P43403': [u'hsa:7535']})
+    print map1 # defaultdict(<type 'list'>, {u'P43403': [u'hsa:7535']})
 
     kegg_ids = []
     for i in map1.values():
@@ -2146,26 +2146,26 @@ def from_uni_id_get_kegg_spot(uni_id):
         kegg_id = i[3:-2]
         _id = i[7:-2]
         #print _id # lif:LINJ_10_0520
-        print (i, " = ", kegg_id) # [u'lif:LINJ_10_0520'] = lif:LINJ_10_0520
+        print i, " = ", kegg_id # [u'lif:LINJ_10_0520'] = lif:LINJ_10_0520
         k_organism = i[3:6] # 'lif'
         #print k_organism
         kegg_ids.append(kegg_id)
-        print (k.get(str(kegg_id)))
+        print k.get(str(kegg_id))
 
     get_path = None
-    print (k.list("pathway", organism= k_organism))
+    print k.list("pathway", organism= k_organism)
     res_paths = k.list("pathway", organism= k_organism)
     pathways = [x.split()[0] for x in res_paths.strip().split("\n")]
-    print (len(pathways) ,"pathways found in Kegg organism ", k_organism) # as of Nov 2014 -> 94
+    print len(pathways) ,"pathways found in Kegg organism ", k_organism # as of Nov 2014 -> 94
 
   
-    print (uni_id, "\n",k.find(str(k_organism), str(kegg_id)))
+    print uni_id, "\n",k.find(str(k_organism), str(kegg_id))
     get_pname = k.find(str(k_organism), str(kegg_id))
 
     
 
-    print ("Find pathway from gene . . . ")
-    print (k.get_pathway_by_gene(str(_id), str(k_organism)))
+    print "Find pathway from gene . . . "
+    print k.get_pathway_by_gene(str(_id), str(k_organism))
     get_path = k.get_pathway_by_gene(str(_id), str(k_organism)) #else "null"
 
     #bf = open(str(kegg_path)+"_path.txt","w")
@@ -2173,7 +2173,7 @@ def from_uni_id_get_kegg_spot(uni_id):
 
 
     if get_path == None:
-        print ("NO PATHWAY FOUND FOR : ", uni_id)
+        print "NO PATHWAY FOUND FOR : ", uni_id
         
         bf.write(res_paths+"\n")
         bf.write(get_pname)
@@ -2185,16 +2185,16 @@ def from_uni_id_get_kegg_spot(uni_id):
             i = str(i)
             bf.write(str(i)+"\n")
             if i.isdigit() == True and len(i) == 5:
-                print (i)
+                print i
                 kegg_path = i
                 kegg_path = k_organism + kegg_path
-                print ("\n",uni_id, " = ",kegg_id, "\nPathway found: ", kegg_path)
+                print "\n",uni_id, " = ",kegg_id, "\nPathway found: ", kegg_path
             elif len(i) == 8:
                 
                 kegg_path = i
-                print ("\n",uni_id, " = ",kegg_id, "\nPathway found: ", kegg_path)
+                print "\n",uni_id, " = ",kegg_id, "\nPathway found: ", kegg_path
 
-            print ("Showing Pathway Marker in internet page . . .")
+            print "Showing Pathway Marker in internet page . . ."
             #print k.show_pathway(str(kegg_path), keggid={str(kegg_id): "red"})
             show_path = k.show_pathway(str(kegg_path), keggid={str(kegg_id): "red"})
 
@@ -2208,21 +2208,21 @@ def from_uni_id_get_kegg_spot(uni_id):
             cf.write(res1)
         bf.close()
         cf.close()
-        print (bf,"saved ! \n",cf, " saved!")
+        print bf,"saved ! \n",cf, " saved!"
         theInputFiles.append(bf.name)
             
 
     #map2 = k.mapping(fr='KEGG_ID', to='ACC', format='tab', query='hsa:7535') # to="PDB_ID"
     #for i in map2.values():
     #print i#'P43403'
-    print ("\nBioservices - Kegg - ACCESS AC - DONE!")
+    print "\nBioservices - Kegg - ACCESS AC - DONE!"
     #print f1, "\n",f2,"\n", f3,"\n", f4 ,"\n", " are saved!"
 
    
     Freq = 1000 # Set Frequency To 2500 Hertz
     Dur = 100 # Set Duration To 1000 ms == 1 second
     winsound.Beep(Freq,Dur)
-    print ("(complete!)")
+    print "(complete!)"
 
 
 #ids_kegg = ["A4HSF7","A4HZJ3","Q7K8Z6"]
@@ -2245,73 +2245,73 @@ def from_gene_id_get_kegg(gene_id):
 
     k = KEGG(verbose=False)
 
-    print ("KEGG  -  Look for relevante Pathways, using gene . . . ")
+    print "KEGG  -  Look for relevante Pathways, using gene . . . "
 
-    print ("Mapping gene to protein ac . . . ")
+    print "Mapping gene to protein ac . . . "
     u = UniProt()
     res = u.search(str(gene_id), frmt="tab", columns="genes, id")
     for i in res.split("\n"):
-        print (i)
+        print i
         while len(i.split("\t")) > 1 :
             i = i.split()[1]
             #print i
             if i[0] in letters and i[1] in numbers and i[-1] in numbers:
-                print (i)
+                print i
                 uni_id = i
 
     kegg_ids = []
 
-    print ("Mapping protein ac to kegg ID. . . ")
+    print "Mapping protein ac to kegg ID. . . "
     # http://pythonhosted.org/bioservices/convertor_tutorial.html
     map1  = u.mapping(fr="ACC+ID", to="KEGG_ID", query=str(uni_id))# P_ENTREZGENEID, "UNIGENE_ID, EMBL,GeneID
-    print( map1 )# defaultdict(<type 'list'>, {u'P43403': [u'hsa:7535']})
+    print map1 # defaultdict(<type 'list'>, {u'P43403': [u'hsa:7535']})
 
     for i in map1.values():
         i = str(i)
         kegg_id = i[3:-2]
         _id = i[7:-2]
-        print (_id) # LINJ_10_0520
-        print (i, " = ", kegg_id) # [u'lif:LINJ_10_0520'] = lif:LINJ_10_0520
+        print _id # LINJ_10_0520
+        print i, " = ", kegg_id # [u'lif:LINJ_10_0520'] = lif:LINJ_10_0520
         k_organism = i[3:6] # 'lif'
-        print (k_organism)
+        print k_organism
         kegg_ids.append(kegg_id)
-    print (k.get(str(kegg_id)))
+    print k.get(str(kegg_id))
     get_kegg = k.get(str(kegg_id))
 
 
-    print ("Find  protein . . . ")
+    print "Find  protein . . . "
     #pname = raw_input("Please enter protein name : ")
-    print (k.find(str(k_organism), uni_id))
+    print k.find(str(k_organism), uni_id)
     get_pname = k.find(str(k_organism), uni_id)
 
-    print ("Find  pathways for this organism . . . ")
-    print (k.list("pathway", organism= k_organism))
+    print "Find  pathways for this organism . . . "
+    print k.list("pathway", organism= k_organism)
     res_paths = k.list("pathway", organism= k_organism)
     pathways = [x.split()[0] for x in res_paths.strip().split("\n")]
-    print (len(pathways) ,"pathways found in Kegg organism ", k_organism) # as of Nov 2014 -> 94)
+    print len(pathways) ,"pathways found in Kegg organism ", k_organism # as of Nov 2014 -> 94
     
    
-    print (uni_id, "\n",k.find(str(k_organism), str(kegg_id))) # lif:LINJ_14_0700	putative fatty acid elongase (EC:2.3.1.119)
+    print uni_id, "\n",k.find(str(k_organism), str(kegg_id)) # lif:LINJ_14_0700	putative fatty acid elongase (EC:2.3.1.119)
 
     get_pname = k.find(str(k_organism), str(kegg_id))
 
-    print ("Find pathway from gene . . . ")
+    print "Find pathway from gene . . . "
     get_path = k.get_pathway_by_gene(str(_id), str(k_organism))
     
     if get_path.__repr__() == "None":
-        print (get_path)
+        print get_path
         kegg_path = "None"
     else:
         for i in get_path.keys():
-            print (i)
+            print i
             i = str(i)
             if i.isdigit() == True and len(i) == 5:
-                print (i)
+                print i
                 kegg_path = i
                 kegg_path = k_organism + kegg_path
-                print ("\n",uni_id, " = ",kegg_id, "\nPathway found: ", kegg_path)
+                print "\n",uni_id, " = ",kegg_id, "\nPathway found: ", kegg_path
 
-    print ("Showing Pathway Marker in internet page . . .")
+    print "Showing Pathway Marker in internet page . . ."
     #print k.show_pathway(str(kegg_path), keggid={str(kegg_id): "red"})
     
     bf = open(str(gene_id)+"_path.txt","w")
@@ -2323,7 +2323,7 @@ def from_gene_id_get_kegg(gene_id):
         for i in get_path:
             bf.write(str(i))
     
-    print ("Save image of the pathway . . . ")
+    print "Save image of the pathway . . . "
     # NF-kappa B signaling pathway - Homo sapiens (human)
     # res0 =  k.get("hsa05130/image")
     if kegg_path != "None":
@@ -2332,21 +2332,21 @@ def from_gene_id_get_kegg(gene_id):
         cf = open(str(uni_id)+"_path.png","wb")
         cf.write(res1)
     cf.close()
-    print (cf, " saved!")
+    print cf, " saved!"
 
     bf.close()
-    print (bf,"\n", " saved!")
+    print bf,"\n", " saved!"
 
     #map2 = k.mapping(fr='KEGG_ID', to='ACC', format='tab', query='hsa:7535')
     #for i in map2.values():
     #print i#'P43403'
-    print ("\nBioservices - Kegg - ACCESS Gene - DONE!")
+    print "\nBioservices - Kegg - ACCESS Gene - DONE!"
     #print f1, "\n",f2,"\n", f3,"\n", f4 ,"\n", " are saved!"
     theInputFiles.append(bf.name)
     Freq = 1000 # Set Frequency To 2500 Hertz
     Dur = 100 # Set Duration To 1000 ms == 1 second
     winsound.Beep(Freq,Dur)
-    print ("(complete!)")
+    print "(complete!)"
 
 #from_gene_id_get_kegg("LINJ_14_0700")
 
