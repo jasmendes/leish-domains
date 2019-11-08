@@ -89,6 +89,7 @@ print ("""\nSpecial dependencies are:
     numpy; scipy; matplotlib;
     Venn3;Venn """)
 
+import bio as Bio
 from bioservices_functions_tk import *
 
 from run_bioblast_tk import * # from run_biopython_tk import *

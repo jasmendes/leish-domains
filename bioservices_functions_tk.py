@@ -99,12 +99,15 @@ sys.path.append("C:\Python276\Lib\site-packages")
 sys.path.append("C:\Python276\Lib")
 #print sys.path
 
+# /kaggle/input/02-exp.txt
 
 
 
 from bioservices import *
 
-from Bio import Entrez
+from bio import Entrez
+#import bio as Bio
+#from Bio import Entrez
 from Bio import ExPASy
 from Bio import Medline
 from Bio import PDB
@@ -2390,20 +2393,20 @@ def from_uni_ids_get_kegg_path(uni_ids):
    k = KEGG(verbose=False)
    
    #k.lookfor_organism("leish")
-   print k.lookfor_organism(raw_input("\nLook for organism kegg name : "))# "droso" 
+   print (k.lookfor_organism(raw_input("\nLook for organism kegg name : ")))# "droso" 
 
    #print "KEGG Tax ID: ", k.code2Tnumber("hsa") # T01001
    #print k.get("hsa:7535")
 
 
    k.organism = raw_input("\nEnter organism kegg name (3 letters): ")#"lif"
-   print "Converting KEGG Tax ID to Tnumber ", k.code2Tnumber(k.organism) # T01001
+   print ("Converting KEGG Tax ID to Tnumber ", k.code2Tnumber(k.organism)) # T01001
 
    #if k.organism == True:
-   print k.list("pathway", organism= k.organism)
+   print (k.list("pathway", organism= k.organism))
    res = k.list("pathway", organism= k.organism)
    pathways = [x.split()[0] for x in res.strip().split("\n")]
-   print len(pathways) ,"pathways found in Kegg organism ", k.organism # as of Nov 2014 -> 94
+   print (len(pathways) ,"pathways found in Kegg organism ", k.organism) # as of Nov 2014 -> 94
     
     #print s.get("lif:LINJ_10_0520")
     # INFO:root:REST.bioservices.Kegg request begins
@@ -2418,18 +2421,18 @@ def from_uni_ids_get_kegg_path(uni_ids):
    for i in uni_ids:
            res_id = u.mapping("ACC", "KEGG_ID", query=str(i))
            kegg_id = res_id.values()
-           print ', '.join("%s = %r" % (key,val) for (key,val) in res_id.iteritems())
-           print kegg_id           
+           print (', '.join("%s = %r" % (key,val) for (key,val) in res_id.iteritems()))
+           print (kegg_id)           
            #kegg_ids = kegg_ids.append(kegg_id)
            for i in res_id.values():
                    i = str(i)
-                   print i
+                   print (i)
                    kegg_ids.append(i[3:-2])
 
         # GET ENTRY - hsa:7535
    for i in kegg_ids:
-       print i
-       print k.get(str(k.organism)+":"+str(i))
+       print (i)
+       print (k.get(str(k.organism)+":"+str(i)))
    #print k.get("hsa:7535")
    
    
@@ -2450,9 +2453,9 @@ def from_uni_ids_get_kegg_path(uni_ids):
    DBLINKS : UniProt: P43403
    """
    
-   print "Find gene from name: (organism, protein_name)"
+   print ("Find gene from name: (organism, protein_name)")
    pname = raw_input("\nEnter protein name : ")
-   print k.find(k.organism, pname)
+   print (k.find(k.organism, pname))
 
    # GET PATHWAY BY GENE OR KEGGID + k.organism
    # Use the correspondence number to search kegg pathways 
@@ -2485,7 +2488,7 @@ def from_uni_ids_get_kegg_path(uni_ids):
    
    #print k.show_pathway("hsa04064", keggid={"7535": "red"})
    kegg_id1 = "LINJ_08_0950"
-   print k.show_pathway("lif05140", keggid={str(kegg_id1): "red"}) #CBP in Prostate Cancer
+   print (k.show_pathway("lif05140", keggid={str(kegg_id1): "red"})) #CBP in Prostate Cancer
    
    # http://www.genome.jp/kegg-bin/show_pathway?map=hsa05215&show_description=show
    # http://www.genome.jp/kegg-bin/show_pathway?map=lif05140&show_description=show
@@ -2528,10 +2531,10 @@ def from_gene_ids_get_kegg_path(gene_ids):
     s.organism = raw_input("Enter organism kegg name : ")#"lif"
     
     if s.organism == True:
-            print s.list("pathway", organism= s.organism)
+            print (s.list("pathway", organism= s.organism))
             res = s.list("pathway", organism= s.organism)
             pathways = [x.split()[0] for x in res.strip().split("\n")]
-            print len(pathways) ,"pathways" # as of Nov 2014 -> 94
+            print (len(pathways) ,"pathways") # as of Nov 2014 -> 94
     
     #print s.get("lif:LINJ_10_0520")
     # INFO:root:REST.bioservices.Kegg request begins
@@ -2561,7 +2564,7 @@ def from_gene_ids_get_kegg_path(gene_ids):
                 TVEQMMCTDMYCREGCKKSLLTANVCYKNGGGGSSMTKCGPQKVLMCSYSNPHCFGPGLC
                 LETPDGKCAPYFLGSIMNTCQYT"""
     #print s.get("uniprot:P43403")
-    print s.get("path:"+str(s.organism)+raw_input("Enter Path ID (5 digits) :"))
+    print (s.get("path:"+str(s.organism)+raw_input("Enter Path ID (5 digits) :")))
     # INFO:root:REST.bioservices.Kegg request begins
     # INFO:root:--Fetching url=http://rest.kegg.jp/get/path:lif01100
     """
@@ -2574,10 +2577,10 @@ def from_gene_ids_get_kegg_path(gene_ids):
     #print s.find("lif", "PKC")                          NAME
     #print s.find("lif", "ko01100")                      CODE
     for gene in gene_ids:
-            print s.get_pathway_by_gene(str(gene), s.organism)#  GENE
+            print (s.get_pathway_by_gene(str(gene), s.organism))#  GENE
             #print s.get_pathway_by_gene(gene_id, s.organism)#  GENE
 
-    print "\nBioservices - Kegg - ACCESS Gene - DONE!"        
+    print ("\nBioservices - Kegg - ACCESS Gene - DONE!"   )     
     #print f1, "\n",f2,"\n", f3,"\n", f4 ,"\n", " are saved!"
 
     
@@ -2608,18 +2611,18 @@ def from_kegg_ids_get_kegg_path(kegg_ids):
                 pass
         res_id = u.mapping("ACC", "KEGG_ID", query=str(i))
         kegg_id = res_id.values()
-        print i , " > ", kegg_id
+        print (i , " > ", kegg_id)
         #print ', '.join("%s = %r" % (key,val) for (key,val) in res_id.iteritems())
 
         kegg_ids = []
         for i in res_id.values():
             i = str(i)
-            print i
+            print (i)
             kegg_ids.append(i[3:-2])
 
     # GET ENTRY - hsa:7535
     for i in kegg_ids:
-        print i
+        print (i)
         #print k.get(str(k.organism)+":"+str(i))
 
     
@@ -2627,7 +2630,7 @@ def from_kegg_ids_get_kegg_path(kegg_ids):
 #from_uni_ids_get_kegg_path(uni_ids)
 
 def from_gene_uni_ids_get_kegg_image():
-    print "In Progress . . ."
+    print ("In Progress . . .")
 
 ######################################################################################
 ####################33             Look for pathways (by name)          ###################
@@ -2645,21 +2648,21 @@ def from_name_get_kegg_paths_genes():
         k = KEGG(verbose=False)
 
         #k.lookfor_organism("leish")
-        print "\nLook for pathways (by name)"
-        print k.lookfor_organism(raw_input("\nLook for organism kegg name : "))# "droso"
+        print ("\nLook for pathways (by name)")
+        print (k.lookfor_organism(raw_input("\nLook for organism kegg name : ")))# "droso"
 
         #print "KEGG Tax ID: ", k.code2Tnumber("hsa") # T01001
         #print k.get("hsa:7535")
 
         k.organism = raw_input("\nEnter organism kegg name (3 letters): ")
-        print "Converting KEGG Tax ID to Tnumber ", k.code2Tnumber(k.organism) # T01001
+        print ("Converting KEGG Tax ID to Tnumber ", k.code2Tnumber(k.organism)) # T01001
         #if k.organism == True:
 
-        print k.list("pathway", organism= k.organism)
+        print ((k.list("pathway", organism= k.organism)))
 
         res = k.list("pathway", organism= k.organism)
         pathways = [x.split()[0] for x in res.strip().split("\n")]
-        print len(pathways) ,"pathways found in Kegg organism ", k.organism # as of Nov 2014 -> 94
+        print (len(pathways) ,"pathways found in Kegg organism ", k.organism )# as of Nov 2014 -> 94
 
         f1 = open(str(k.organism)+"_pathways.txt","wt")
         for i in res.strip().split("\n"):
@@ -2668,25 +2671,25 @@ def from_name_get_kegg_paths_genes():
         f1.close()
 
 
-        print "\nFind gene from protein name : (organism, protein_name)"
+        print ("\nFind gene from protein name : (organism, protein_name)")
         name = raw_input("\nEnter protein name : ")
         f2 = open(str(k.organism)+"_"+name+"_genes.txt","wt")
         for i in k.find(k.organism, name).splitlines():
-                print i
+                print (i)
                 f2.write(i+"\n")
 
         f3 = open(str(k.organism)+"_"+name+"_path.txt","wt")
         f4 = open(name+".png", "wb")
 
         # USE GENE
-        print k.get(str(k.organism)+":"+"LINJ_05_0040")
+        print (k.get(str(k.organism)+":"+"LINJ_05_0040"))
         for i in k.get_pathway_by_gene("LINJ_08_0960", k.organism):
                 if i[0:3] == k.organism:
-                        print i
-                        print k.get(i)
+                        print (i)
+                        print (k.get(i))
                         f3.write(k.get(i))
                         # Show in INTERNET page
-                        print k.show_pathway(i)
+                        print (k.show_pathway(i))
                         res1 =  k.get(str(i)+"/image")
                         f4.write(res1)
         
@@ -2705,8 +2708,8 @@ def from_name_get_kegg_paths_genes():
         
         # same as : res =  s.get("hsa05130","image")
 
-        print "\nBioservices - Kegg - ACCESS Name - DONE!"        
-        print f1, "\n",f2,"\n", f3,"\n", f4 ,"\n", " are saved!"
+        print ("\nBioservices - Kegg - ACCESS Name - DONE!"   )     
+        print (f1, "\n",f2,"\n", f3,"\n", f4 ,"\n", " are saved!")
 
        
   
@@ -2749,7 +2752,7 @@ def from_pdb_id_get_pdb(pdb_id):
     #s.get_current_ids() error
 
     res2 = s.get_ligands(str(pdb_id))
-    print "\n    Bioservices Webservices\nLigand info for ",pdb_id,"\n",res2
+    print ("\n    Bioservices Webservices\nLigand info for ",pdb_id,"\n",res2)
     
     #import tempfile
     #fh = tempfile.NamedTemporaryFile()
@@ -2761,14 +2764,14 @@ def from_pdb_id_get_pdb(pdb_id):
     f1 = open("output/"+str(pdb_id)+".pdb", "w")
     f1.write(res1)
     f1.close()
-    print "\nBioservices - PDB - ACCESS PDB STRUCTURE - DONE!"
+    print ("\nBioservices - PDB - ACCESS PDB STRUCTURE - DONE!")
     # print "Proteins found for this GO term:", count
-    print f1 , "is saved!"
+    print (f1 , "is saved!")
     #theInputFiles.append(f1.name)
     Freq = 1000 # Set Frequency To 2500 Hertz
     Dur = 100 # Set Duration To 1000 ms == 1 second
     winsound.Beep(Freq,Dur)
-    print "(complete!)"
+    print ("(complete!)")
 
 
 #from_pdb_id_get_pdb("1FBV")
@@ -2793,7 +2796,7 @@ def access_wikipatways_by_prot_ids(theProtIDs):
         s.findPathwaysByXref('P45985')
         for i in theProtIDs:
                 s.findPathwaysByXref(str(i))
-        print "done!"
+        print ("done!")
 
 
 
@@ -2880,15 +2883,15 @@ def get_bmq_ipr2go():
     res2 = s.query(xml_query)
     res2 = res2.split("\n") # TOTAL = 42128, 62706(6out)
     header22 ="""entry_id\tentry_name\tentry_type\tgo_id\tgo_term_name\tgo_root_name\n"""
-    print header22
-    for i in res2[0:10]: print i
+    print (header22)
+    for i in res2[0:10]: print (i)
     bFile = open("output/_bmq_ipr_go.txt", "wt")
     bFile.write(str(header22))
     for aLine in res2:
         bFile.writelines(aLine+"\n")
     bFile.close()
-    print  """Biomart Query | Hits : """, str(len(res2))
-    print bFile, " saved!"
+    print  ("""Biomart Query | Hits : """, str(len(res2)))
+    print (bFile, " saved!")
     
     
 def FileCheck(kf):
@@ -2896,7 +2899,7 @@ def FileCheck(kf):
       open(kf, "r")
       return 1
     except IOError:
-      print "Error: File %s not appear to exist.\nLet 's create <_bmq_ipr_go.txt>" % kf
+      print ("Error: File %s not appear to exist.\nLet 's create <_bmq_ipr_go.txt>" % kf)
       get_bmq_ipr2go()
       return 0
 
@@ -2920,7 +2923,7 @@ def get_db_interpro2go():
 def get_webinfo():
     import urllib
     f = urllib.urlopen("http://api.bitcoincharts.com/v1/trades.csv?symbol=mtgoxUSD")
-    print f.read()
+    print (f.read())
 
 #get_webinfo()
     
@@ -2950,7 +2953,7 @@ def update_family_tree():
    url2 = "ftp://ftp.ebi.ac.uk/pub/databases/interpro/ParentChildTreeFile.txt"
    response = urllib2.urlopen(url2)
    webContent = response.read()
-   print webContent[0:300]
+   print (webContent[0:300])
    fname = url2.split("/")[-1]
    fname = fname[:-4]
    with open(str(fname)+".txt","w") as out_f:
