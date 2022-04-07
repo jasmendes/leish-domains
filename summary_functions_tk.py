@@ -86,7 +86,7 @@ import winsound
 
 
 
-#Renato: trabalho Estágio Fase0
+#Renato: trabalho Estï¿½gio Fase0
 """Entry
 Entry name
 Status
@@ -136,7 +136,7 @@ def readUniProtTab_sum (filename, n = 0, with_fields = False):
     while len(fields) <=1:
         first = f.readline()
         first = first.strip()
-        print first
+        print (first)
         fields = first.split("\t")
         if len(fields) >1:
             for i, value in enumerate(fields):
@@ -258,7 +258,7 @@ def readUniProtTab_sum (filename, n = 0, with_fields = False):
         all_lists.append(twenty)
    
 
-    print "\n > > > > > > > > > > > > > > > SUMMARY < < < < < < < < < < < < < < < "
+    print ("\n > > > > > > > > > > > > > > > SUMMARY < < < < < < < < < < < < < < < ")
     list3 = fields
     #list3.append("LAA")
     #list3.append("LEE")
@@ -271,8 +271,8 @@ def readUniProtTab_sum (filename, n = 0, with_fields = False):
         a = Counter(item)
         col = list3.pop(0)
         #list3.append(col)
-        print "\nTOTAL %s found : %s "  % (col,len(item)) #len(accs) # 6597
-        print "UNIQUE %s :%s " % (col, len(a)) 
+        print ("\nTOTAL %s found : %s "  % (col,len(item))) #len(accs) # 6597
+        print ("UNIQUE %s :%s " % (col, len(a)) )
         #cov = (len(a)/len(item))
         div = a.most_common(1)
         for i,j in div:
@@ -284,9 +284,9 @@ def readUniProtTab_sum (filename, n = 0, with_fields = False):
             else:
                 cov = 1 - (j/float(len(item))) # most common(uncharacterized) / total found
                 enr = (len(a)/float(len(item))) # unique / total found
-                print " **** Estimation:\nCoverage: ", ("{0:.2f}".format(cov))#
-                print "Enrichment", ("{0:.2f}".format(enr))
-        print "\n", a.most_common(25) # 2088
+                print (" **** Estimation:\nCoverage: ", ("{0:.2f}".format(cov)))#
+                print ("Enrichment", ("{0:.2f}".format(enr)))
+        print ("\n", a.most_common(25)) # 2088
         for j in sorted(dict(a.most_common(150)), key=lambda x :dict(a.most_common(150))[x]): # instead of 25 use all
             #print j, "\t", a[j]
             jfile.write(str(j)+ "\t"+ str( a[j])+"\n")
@@ -300,8 +300,8 @@ def readUniProtTab_sum (filename, n = 0, with_fields = False):
     
     jfile.close()
     theInputFiles.append(jfile.name)
-    print jfile.name ," saved!"
-    print "************** done! ****************"
+    print (jfile.name ," saved!")
+    print ("************** done! ****************")
 
     if not with_fields:
        return protdata
@@ -397,7 +397,7 @@ def calc_benjamini_hochberg_corrections(p_values, num_total_tests):
     bh_values = 0
     ph_values = 0
     prev_bh_value = 0
-    print "p value \t fdr"
+    print ("p value \t fdr")
     fdr_dict = {}
     
     for i, p_value in enumerate(p_values):
@@ -426,8 +426,8 @@ def calc_benjamini_hochberg_corrections(p_values, num_total_tests):
         fdr_dict[pval] = bhval
         
         
-    print "sum p_values = %s " %ph_values 
-    print "sum bh_values = %s" %bh_values
+    print ("sum p_values = %s " %ph_values )
+    print ("sum bh_values = %s" %bh_values)
     
         
 
@@ -468,15 +468,15 @@ def get_bmq_ipr2go():
     res2 = s.query(xml_query)
     res2 = res2.split("\n") # TOTAL = 42128, 62706(6out)
     header22 ="""entry_id\tentry_name\tentry_type\tgo_id\tgo_term_name\tgo_root_name\n"""
-    print header22
+    print (header22)
     for i in res2[0:10]: print i
     bFile = open("output/_bmq_ipr_go.txt", "wt")
     bFile.write(str(header22))
     for aLine in res2:
         bFile.writelines(aLine+"\n")
     bFile.close()
-    print  """Biomart Query | Hits : """, str(len(res2))
-    print bFile, " saved!"
+    print  ("""Biomart Query | Hits : """, str(len(res2)))
+    print (bFile, " saved!")
     
     
 def FileCheck(kf):
@@ -484,7 +484,7 @@ def FileCheck(kf):
       open(kf, "r")
       return 1
     except IOError:
-      print "Error: File does not appear to exist.\nLet 's create <bmq_ipr_go.txt>"
+      print ("Error: File does not appear to exist.\nLet 's create <bmq_ipr_go.txt>")
       get_bmq_ipr2go()
       return 0
 
@@ -526,7 +526,7 @@ def plot2yaxes(df, fields = True):
     
     df = pd.read_csv(df ,delimiter = "\t", header=True) # delim_whitespace=True,header=None)
 
-    print df
+    print( df)
     #dfile = open(df, "r")
     
 
@@ -577,7 +577,7 @@ def plot_2ylines(df):
     first = dfile.readline()
     first = first.strip()
     fields = first.split("\t")
-    print fields
+    print (fields)
     
     gos = []
     counts = []
@@ -647,8 +647,8 @@ def plot_2ylines(df):
             #print i[2]
             counts2.append(i[2])
         else:
-            print "he"
-            print i[2],i[-2], val
+            
+            print (i[2],i[-2], val)
 
     lf.close()
     #print dfile.name[:-4]
@@ -699,7 +699,7 @@ def plot_2ylines(df):
     Freq = 1000 # Set Frequency To 2500 Hertz
     Dur = 100 # Set Duration To 1000 ms == 1 second
     winsound.Beep(Freq,Dur)
-    print "(complete!)"
+    print ("(complete!)")
         
     time_end = datetime.datetime.fromtimestamp(time.time())
     print("Time elapsed: ", str(time_end - time_begin))
@@ -747,9 +747,9 @@ def enrichment_analysis_domains(af, bf, kf): # n = 1000
     # now you can call it directly with basename
     #print basename(af)
     #str(af[:-4])+
-    print "choice 1 = ", af
-    print "choice 2 = ", bf
-    print "dict ipr2go = " , kf
+    print ("choice 1 = ", af)
+    print ("choice 2 = ", bf)
+    print ("dict ipr2go = " , kf)
     cfile = str(af[:-4])+"_go_enrichments.txt"
     cf = open(cfile, "w+")
     dfile = str(af[:-4])+"_ipr_enrichments.txt"
