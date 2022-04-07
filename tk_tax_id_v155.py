@@ -89,20 +89,20 @@ print ("""\nSpecial dependencies are:
     numpy; scipy; matplotlib;
     Venn3;Venn """)
 
-import bio as Bio
+#import bio as Bio
 from bioservices_functions_tk import *
 
-from run_bioblast_tk import * # from run_biopython_tk import *
-from bi_biopython_functions_tk import *
+#from run_bioblast_tk import * # from run_biopython_tk import *
+##from bi_biopython_functions_tk import *
 
 
 
-from summary_functions_tk import *
-from auxiliary_functions_tk import *
+#from summary_functions_tk import *
+#from auxiliary_functions_tk import *
 
 
-from summary_plot_tk import *
-from summary_enrich_tk import *
+#from summary_plot_tk import *
+#from summary_enrich_tk import *
 
 
 
@@ -118,22 +118,23 @@ from summary_enrich_tk import *
 ##############################################################
 
 """Program Interface for Proteomic Data Analysis"""
-
-from Tkinter import *
-import ttk
+import tkinter
+from tkinter import *
+#import ttk
 
 import winsound
 from glob import *
 
-from tkMessageBox import *
+from tkinter import messagebox
+#from tkMessageBox import *
 
-import tkFileDialog
+#import tkFileDialog
 #from tkFileDialog import *
 #from fs import *
 
 import sys
 from Bio import Entrez
-#from numpy import *
+from numpy import *
 
 
 global theInputFiles
@@ -528,8 +529,8 @@ def print_readme2(theFilename2):
 ##################################################################################
 
 
-from Bio import Entrez
-Entrez.email = "jmend3z@gmail.com"
+#from Bio import Entrez
+#Entrez.email = "jmend3z@gmail.com"
 
 def get_tax_id(species):
     """to get data from ncbi taxomomy, we need to have the taxid. we can
@@ -2047,7 +2048,7 @@ def lab2uni2ipr2go2kegg(theFilename):
     #T.insert(END, quote)"""
 # TypeError: search() got an unexpected keyword argument 'format'
 
-from run_bioblast_tk import *
+#from run_bioblast_tk import *
 
 def print_data():
 
@@ -2218,7 +2219,7 @@ def print_data():
                         #access_blast_with_biopython(theTaxID)
 
 
-import run_biopython_tk
+#import run_biopython_tk
 # uni_search_words(theTerms)
 
 # The  most important value to compare between databases is also the most present and makes it easy to find.
@@ -2422,7 +2423,7 @@ def summary_analysis():
         print ('|' * i)
     print ("                                                        100%")
 
-    import run_summary_functions_bs_tk  # loads and runs
+#import run_summary_functions_bs_tk  # loads and runs
 
 
 # run_uniprot_summary_functions_bs()
@@ -2451,7 +2452,7 @@ def run_res():
 
 ###############
 
-from run_summary_functions_manual_tk import * #stats_bmv_manual
+#from run_summary_functions_manual_tk import * #stats_bmv_manual
 #from run_summary_functions_bs_tk import * # stats_uniprot_bs, stats_interpro_bs
 
 import summary_functions_tk

@@ -105,9 +105,9 @@ sys.path.append("C:\Python276\Lib")
 
 from bioservices import *
 
-from bio import Entrez
-#import bio as Bio
-#from Bio import Entrez
+
+
+from Bio import Entrez
 from Bio import ExPASy
 from Bio import Medline
 from Bio import PDB
@@ -124,11 +124,11 @@ from math import pi
 import urllib
 
 
-Entrez.email = 'fc34880@alunos.fc.ul.pt'
+#Entrez.email = 'fc34880@alunos.fc.ul.pt'
 #Entrez.email = "jmend3z@gmail.com"
 
 #import iprscan_soappy2
-import iprscan_urllib2
+#import iprscan_urllib2
 #from  task07 import *
 
 import random
