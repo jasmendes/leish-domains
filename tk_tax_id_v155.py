@@ -120,6 +120,7 @@ from bioservices_functions_tk import *
 """Program Interface for Proteomic Data Analysis"""
 import tkinter
 from tkinter import *
+
 #import ttk
 
 import winsound
@@ -174,36 +175,36 @@ jp.title(frontname)
 
 
 def faznada():
-    showinfo("About", "ProteomicStats \n Set 2015 \n  Jose' A. S. Mendes\n v 1.0 ")
+    messagebox.showinfo("About", "ProteomicStats \n Set 2015 \n  Jose' A. S. Mendes\n v 1.0 ")
 
 
 def get_out():
     if askyesno('Verify', 'Are you sure?'):
-        showinfo('Warning', 'Bye')
+        messagebox.showinfo('Warning', 'Bye')
         quit()
     else:
         showinfo("Warning", "Exit cancelled.")
 
 
 def mostra_erro():
-    showerror("Error", "well, it doesn' t work yet :)")
+    messagebox.showerror("Error", "well, it doesn' t work yet :)")
 
 
 def show_file():
     nome = askopenfilename()
     if len(nome) > 0:
-        showinfo("OK", "Selected file:\n"+nome)
+        messagebox.showinfo("OK", "Selected file:\n"+nome)
     else:
-        showinfo("Info", "No file selected.")
+        messagebox.showinfo("Info", "No file selected.")
 
 
 def save_data():
     "This functions takes combined KEYS and makes a unique accession table separayed values"
     if askyesno('Verify', 'Save data?'):
-        showinfo('Verify', 'Saving...')
+        messagebox.showinfo('Verify', 'Saving...')
         #SystemExit("Saving..."
     else:
-        showinfo("Verify", "No data saved.")
+        messagebox.showinfo("Verify", "No data saved.")
 
 
 def quit():
@@ -358,7 +359,7 @@ def upload_file_list():
                 #showinfo("OK", "Filename :\n"+filename_input2)
                 showname = namewdir
                 
-        showinfo("Upoad File", "Filename :\n"+filename_input2)
+        messagebox.showinfo("Upoad File", "Filename :\n"+filename_input2)
         theFilenames1.append(showname)
 
         #print aFile.name
@@ -384,7 +385,7 @@ def upload_file_list():
         #return choice
 
     else:
-        showinfo("Warning", "No file was selected.")
+        messagebox.showinfo("Warning", "No file was selected.")
 
 
 ##############################################################################################################
@@ -799,7 +800,7 @@ def save_session(theInputFiles):
         # os.rename(source, dest)
         # shutil.move("path/to/current/file.foo", "path/to/new/destination/for/file.foo")
 
-    showinfo(" Save Session ", "Complete :\n"+path)
+    messagebox.showinfo(" Save Session ", "Complete :\n"+path)
     print ("\n", af.name, "saved!")
     print ("Session Saving . . .", path, "\n", "complete!")
 
@@ -823,7 +824,7 @@ def load_session():
 
 
     if filename_input == "":
-        showinfo("Load session", "No Session Loaded!")
+        messagebox.showinfo("Load session", "No Session Loaded!")
         return
 
     if trig =="session" or "SESSION":
@@ -845,10 +846,10 @@ def load_session():
             i+=1
             
         aFile.close()
-        showinfo(" Load Session ", "Complete :\n"+name)
+        messagebox.showinfo(" Load Session ", "Complete :\n"+name)
         print ("\nSession Loading . . . ", name ,"\n","Complete!")
     else:
-        showinfo(" Load Session ", "No Session loaded . . . ")
+        messagebox.showinfo(" Load Session ", "No Session loaded . . . ")
 
 
 ############################################################################

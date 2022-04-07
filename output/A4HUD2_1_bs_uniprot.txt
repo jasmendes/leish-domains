@@ -1,0 +1,2 @@
+Entry	Protein names	InterPro	Domain count	Domains	Gene ontology IDs	Gene ontology (GO)	Gene names	EC number	Pathway	Protein existence	Organism	Organism ID
+A4HUD2	Uncharacterized protein	IPR009944; 	0		GO:0016021	integral component of membrane [GO:0016021]	LINJ_10_0240			Predicted	Leishmania infantum	5671

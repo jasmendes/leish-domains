@@ -140,7 +140,7 @@ def readUniProtTab_sum (filename, n = 0, with_fields = False):
         fields = first.split("\t")
         if len(fields) >1:
             for i, value in enumerate(fields):
-                print "col%s =%s " % (i ,value)
+                print ("col%s =%s " % (i ,value))
                 dict_values[i] = value
         break
 
@@ -280,7 +280,7 @@ def readUniProtTab_sum (filename, n = 0, with_fields = False):
             #print type(i) # str
             if type(i) == type(1.0):#s_number(i) == True:
                 #isinstance(x, (int, long, float, complex)) == True:
-                print "\n"
+                print ("\n")
             else:
                 cov = 1 - (j/float(len(item))) # most common(uncharacterized) / total found
                 enr = (len(a)/float(len(item))) # unique / total found
@@ -831,25 +831,25 @@ def enrichment_analysis_domains(af, bf, kf): # n = 1000
                         #default_data.update({'item3': 3})
                         #print i
 
-    print "TOTAL IPRs1 : ",len(iprs1),"\nTOTAL IPRs2 : " , len(iprs2)
-    print "TOTAL GOs1 : ",len(gos1),"\nTOTAL GOs2 : " , len(gos2)
+    print ("TOTAL IPRs1 : ",len(iprs1),"\nTOTAL IPRs2 : " , len(iprs2))
+    print ("TOTAL GOs1 : ",len(gos1),"\nTOTAL GOs2 : " , len(gos2))
                         
     one = set(iprs1) #uniq_iprs1)
     two = set(iprs2) # uniq_iprs2)
 
     # IPR IDs
     #**set(['a', 'c', 'b'])**
-    print "\nAll Domains ", af, bf
-    print "1 Union 2 = ", "\t", len(one.union(two))
+    print ("\nAll Domains ", af, bf)
+    print ("1 Union 2 = ", "\t", len(one.union(two)))
     #a = most.common(one)
     
-    print "\nDomains in common: ", af, bf
-    print "1 Intersection 2 = ", "\t", len(one.intersection(two))
+    print ("\nDomains in common: ", af, bf)
+    print ("1 Intersection 2 = ", "\t", len(one.intersection(two)))
     #print one.intersection(two)
 
     #**set(['a', 'c', 'b', 'd'])**
-    print "\nDomains ", af, bf
-    print "1 Union 2 - 1 Intersection 2 = ","\t", len(one.union(two)  - one.intersection(two))
+    print ("\nDomains ", af, bf)
+    print ("1 Union 2 - 1 Intersection 2 = ","\t", len(one.union(two)  - one.intersection(two)))
     #**set(['d'])**
 
     #a = [1, 2, 3, 4, 5]
@@ -862,23 +862,23 @@ def enrichment_analysis_domains(af, bf, kf): # n = 1000
     four = set(gos2) # uniq_iprs2)
 
     #**set(['a', 'c', 'b'])**
-    print "\nAll GOs ", af, bf
-    print "2 Union 1 = ", "\t", len(four.union(three))
+    print ("\nAll GOs ", af, bf)
+    print ("2 Union 1 = ", "\t", len(four.union(three)))
     #print four.union(three)
     
-    print "\nGOs in common: ", af, bf
-    print "2 Intersection 1 = ", "\t", len(four.intersection(three))
+    print ("\nGOs in common: ", af, bf)
+    print ("2 Intersection 1 = ", "\t", len(four.intersection(three)))
     #print one.intersection(two)
 
     
     #**set(['a', 'c', 'b', 'd'])**
-    print "\nGOs ", af, bf
-    print "2 Union 1 - 2 Intersection 1 = ","\t", len(four.union(three)  - four.intersection(three))
+    print ("\nGOs ", af, bf)
+    print ("2 Union 1 - 2 Intersection 1 = ","\t", len(four.union(three)  - four.intersection(three)))
 
     ### IPR SUM ###
     c  = Counter(iprs1)
-    print "\nTOTAL iprs1 found : ", len(iprs1) # 6597
-    print "UNIQUE iprs1 : ", len(c), "\n", c.most_common(10) # 2088
+    print ("\nTOTAL iprs1 found : ", len(iprs1)) # 6597
+    print ("UNIQUE iprs1 : ", len(c), "\n", c.most_common(10)) # 2088
     #for i in dict(c.most_common()):
      #   cf.write(str(i)+"\t"+str(c[i])+"\n")
         # print i, c[i]
