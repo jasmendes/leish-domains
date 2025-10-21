@@ -5,6 +5,10 @@ import sys
 from datetime import datetime
 from Bio import Entrez
 import numpy as np
+from glob import glob
+
+from core.session import SessionManager
+from core.logger import get_logger
 
 class LeishDomainsApp:
     def __init__(self):
@@ -15,6 +19,8 @@ class LeishDomainsApp:
         self.theInputFiles = []
         self.choice = None
         self.choice2 = None
+        self.session = SessionManager()
+        self.logger = get_logger()
         
         # Initialize UI
         self.setup_ui()
@@ -90,7 +96,7 @@ class LeishDomainsApp:
         if not folder:
             return
             
-        print(f"FOLDER: {folder}")
+        self.logger.info("Selected folder: %s", folder)
         os.chdir(folder)
         fnames = glob("*.txt") + glob("*.xls")
         os.chdir(os.getcwd())
@@ -101,12 +107,13 @@ class LeishDomainsApp:
             namewdir = namedir + "\\" + namebase
             self.theInputFiles.append(namewdir)
             
-        messagebox.showinfo("New Session", f"Folder imported:\n{namewdir}")
-        print(f"\nNew Session... {folder}\ncomplete!")
+        last = namewdir if fnames else folder
+        messagebox.showinfo("New Session", f"Folder imported:\n{last}")
+        self.logger.info("New session initialized with %d files", len(self.theInputFiles))
         
     def load_session(self):
         """Load an existing session"""
-        print("\n##########    LOADING SESSION      ############")
+        self.logger.info("Loading session file")
         
         filename_input = filedialog.askopenfilename(
             title="Open File Session",
@@ -118,28 +125,59 @@ class LeishDomainsApp:
             return
             
         name = os.path.basename(filename_input)
-        trig = name.split("_")
-        
-        if trig == "session" or "SESSION":
-            with open(filename_input) as aFile:
-                for line in aFile.readlines():
-                    line = line.strip()
-                    self.theInputFiles.append(line)
-                    
-            messagebox.showinfo("Load Session", f"Complete:\n{name}")
-            print(f"\nSession Loading... {name}\nComplete!")
+        base_upper = name.upper()
+        try:
+            loaded = self.session.load(filename_input)
+        except Exception as exc:
+            self.logger.exception("Failed to load session: %s", exc)
+            messagebox.showerror("Load Session", f"Failed to load: {name}")
+            return
+
+        if loaded:
+            self.theInputFiles.extend(loaded)
+            messagebox.showinfo("Load Session", f"Loaded {len(loaded)} entries from:\n{name}")
+            self.logger.info("Session loaded: %s with %d entries", name, len(loaded))
         else:
-            messagebox.showinfo("Load Session", "No Session loaded...")
+            messagebox.showinfo("Load Session", "Session file was empty.")
             
     def save_session(self):
         """Save the current session"""
-        # Implementation from original save_session function
-        pass
+        if not self.theInputFiles:
+            messagebox.showinfo("Save Session", "Nothing to save yet.")
+            return
+
+        target = filedialog.asksaveasfilename(
+            title="Save Session As",
+            defaultextension=".txt",
+            filetypes=[("Text file", ".txt"), ("All files", ".*")]
+        )
+        if not target:
+            return
+
+        try:
+            # If user picked a path, persist using our manager but preserve exact location
+            directory = os.path.dirname(target)
+            # Save to temp path in the chosen directory to get a standard name
+            saved_path = self.session.save(self.theInputFiles, directory=directory)
+            # If the chosen filename differs from default, move/overwrite
+            if os.path.abspath(saved_path) != os.path.abspath(target):
+                with open(saved_path, "r", encoding="utf-8") as src, open(target, "w", encoding="utf-8") as dst:
+                    dst.write(src.read())
+                try:
+                    os.remove(saved_path)
+                except Exception:
+                    pass
+            messagebox.showinfo("Save Session", f"Session saved:\n{target}")
+            self.logger.info("Session saved: %s (%d entries)", target, len(self.theInputFiles))
+        except Exception as exc:
+            self.logger.exception("Failed to save session: %s", exc)
+            messagebox.showerror("Save Session", "Failed to save session.")
         
     def show_control_panel(self):
         """Show the control panel window"""
-        # Implementation from original show_control_panel function
-        pass
+        panel = tk.Toplevel(self.root)
+        panel.title("Control Panel")
+        ttk.Label(panel, text="Coming soon: analysis and tools").grid(row=0, column=0, padx=10, pady=10)
         
     def show_about(self):
         """Show the about dialog"""
