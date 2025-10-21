@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
 import os
 import sys
+import argparse
 from datetime import datetime
 from Bio import Entrez
 import numpy as np
@@ -9,6 +10,7 @@ from glob import glob
 
 from core.session import SessionManager
 from core.logger import get_logger
+from cli import CLIApp
 
 class LeishDomainsApp:
     def __init__(self):
@@ -191,9 +193,33 @@ A tool for analyzing protein domains in Leishmania species."""
         """Start the application"""
         self.root.mainloop()
 
+def create_parser():
+    """Create command-line argument parser."""
+    parser = argparse.ArgumentParser(
+        description="LeishDomains - Protein domain analysis tool",
+        formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    
+    parser.add_argument('--cli', action='store_true', 
+                       help='Run in command-line mode')
+    parser.add_argument('--gui', action='store_true', 
+                       help='Run in GUI mode (default)')
+    
+    return parser
+
 def main():
-    app = LeishDomainsApp()
-    app.run()
+    """Main entry point supporting both GUI and CLI modes."""
+    parser = create_parser()
+    args, unknown_args = parser.parse_known_args()
+    
+    # If --cli is specified or if there are unknown args (CLI commands)
+    if args.cli or unknown_args:
+        cli_app = CLIApp()
+        sys.exit(cli_app.run(unknown_args))
+    else:
+        # Default to GUI mode
+        app = LeishDomainsApp()
+        app.run()
 
 if __name__ == "__main__":
     main() 
