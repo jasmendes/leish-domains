@@ -1,10 +1,8 @@
 """Data merging and joining operations."""
 
 import os
-import random
 from collections import defaultdict
-from typing import List, Dict, Tuple, Optional
-from pathlib import Path
+from typing import Optional
 
 
 class DataMerger:
@@ -88,20 +86,11 @@ class DataMerger:
                                 f.write(f"{new_line}\n")
                                 count += 1
                 else:
-                    # Only in file1
+                    # Only in file1 (keep lines from file1 without matches)
                     for line1 in lines1:
                         if line1 not in pasted:
                             pasted.append(line1)
                             f.write(f"{line1}\n")
-                            count += 1
-            
-            # Only in file2
-            for ac, lines2 in ac2_dict.items():
-                if ac not in ac1_dict:
-                    for line2 in lines2:
-                        if line2 not in pasted:
-                            pasted.append(line2)
-                            f.write(f"{line2}\n")
                             count += 1
         
         self._log(f"Merged {count} lines from {len(ac1_dict)} and {len(ac2_dict)} accessions")
@@ -180,6 +169,8 @@ class DataMerger:
             
             # Read file2
             with open(file2, 'r', encoding='utf-8') as f:
+                # Skip header of second file
+                _ = f.readline()
                 for line in f:
                     line = line.strip()
                     if line and line not in pasted:

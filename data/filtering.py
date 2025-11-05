@@ -2,9 +2,7 @@
 
 import os
 import random
-from collections import Counter
-from typing import List, Set, Optional
-from pathlib import Path
+from typing import List, Optional
 
 
 class DataFilter:

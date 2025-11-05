@@ -1,0 +1,35 @@
+# LeishDomains Default Configuration
+
+app:
+  name: "LeishDomains"
+  version: "2.0.0"
+  description: "Protein domain analysis tool for Leishmania species"
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s | %(levelname)s | %(name)s | %(message)s"
+  date_format: "%Y-%m-%d %H:%M:%S"
+  file: "leishdomains.log"
+
+session:
+  default_prefix: "SESSION"
+  auto_save: true
+  max_files: 1000
+
+data:
+  default_delimiter: "\t"
+  encoding: "utf-8"
+  max_file_size_mb: 100
+
+analysis:
+  default_plot_size: [10, 6]
+  plot_dpi: 300
+  histogram_bins: 30
+
+excel:
+  default_format: "xls"
+  max_sheets: 50
+
+cli:
+  default_output_dir: "output"
+  verbose: false

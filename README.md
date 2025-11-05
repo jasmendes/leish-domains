@@ -133,6 +133,23 @@ leish-domains/
 ├── main.py               # Main application entry point
 ├── requirements.txt      # Dependencies
 └── README.md            # This file
+
+leish-domains/
+├── .github/workflows/     # CI/CD pipeline
+├── core/                  # Core utilities + config + validation
+├── data/                  # Data processing modules
+├── analysis/              # Analysis modules
+├── cli/                   # Command-line interface
+├── tests/                 # Test suite
+├── examples/              # Usage examples and sample data
+├── docs/                  # Sphinx documentation
+├── config/                # Configuration files
+├── main.py               # Dual-mode entry point
+├── setup.py              # Package setup
+├── pyproject.toml        # Modern Python packaging
+├── Makefile              # Development tasks
+├── requirements.txt      # Dependencies
+└── README.md             # Comprehensive documentation
 ```
 
 ## Dependencies

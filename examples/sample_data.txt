@@ -1,0 +1,6 @@
+ID	Name	Description	Value	Category
+A1B2C3	Protein1	Kinase domain protein	100.5	Enzyme
+D4E5F6	Protein2	Binding protein	75.2	Structural
+G7H8I9	Protein3	Transcription factor	200.1	Regulatory
+J0K1L2	Protein4	Membrane protein	150.8	Transport
+M3N4O5	Protein5	Ribosomal protein	89.3	Translation

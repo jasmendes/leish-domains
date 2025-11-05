@@ -1,0 +1,48 @@
+- id: trailing-whitespace
+  name: Trim Trailing Whitespace
+  description: This hook trims trailing whitespace.
+  entry: trailing-whitespace-fixer
+  language: system
+  types: [text]
+
+- id: end-of-file-fixer
+  name: Fix End of Files
+  description: Ensures that a file is either empty or ends with one newline.
+  entry: end-of-file-fixer
+  language: system
+  types: [text]
+
+- id: check-yaml
+  name: Check YAML
+  description: This hook checks yaml files for parseable syntax.
+  entry: check-yaml
+  language: system
+  types: [yaml]
+
+- id: check-added-large-files
+  name: Check for large files
+  description: Prevent large files from being committed.
+  entry: check-added-large-files
+  language: system
+  args: ['--maxkb=1000']
+
+- id: check-merge-conflict
+  name: Check for merge conflicts
+  description: Check for files that contain merge conflict strings.
+  entry: check-merge-conflict
+  language: system
+  types: [text]
+
+- id: debug-statements
+  name: Debug Statements (Python)
+  description: Don't forget to remove pdb statements.
+  entry: debug-statements
+  language: system
+  types: [python]
+
+- id: check-docstring-first
+  name: Check docstring is first
+  description: Checks that docstrings appear before any other statements.
+  entry: check-docstring-first
+  language: system
+  types: [python]

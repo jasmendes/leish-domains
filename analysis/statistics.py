@@ -1,7 +1,6 @@
 """Statistical analysis and data processing."""
 
 import numpy as np
-from scipy import stats
 from collections import Counter
 from typing import List, Dict, Tuple, Optional, Any
 import decimal

@@ -2,8 +2,7 @@
 
 import os
 import itertools
-from typing import List, Iterator, Optional
-from pathlib import Path
+from typing import Iterator
 
 
 class FileOperations:

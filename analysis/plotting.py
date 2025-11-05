@@ -1,8 +1,7 @@
 """Plotting and visualization utilities."""
 
 import matplotlib.pyplot as plt
-import numpy as np
-from typing import List, Dict, Optional, Tuple
+from typing import List, Dict, Optional
 from pathlib import Path
 
 

@@ -2,9 +2,7 @@
 
 import argparse
 import sys
-import os
 from typing import List, Optional
-from pathlib import Path
 
 from core.logger import get_logger
 from core.session import SessionManager
@@ -186,7 +184,7 @@ Examples:
                 files = self.session_manager.load(args.session_file)
                 self.logger.info(f"Session loaded: {len(files)} files")
                 for file in files:
-                    print(file)
+                    self.logger.info(file)
                 return 0
             else:
                 self.logger.error("No session action specified")

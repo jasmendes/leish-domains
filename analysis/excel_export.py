@@ -2,9 +2,7 @@
 
 import os
 import xlwt
-import xlrd
 from typing import List, Optional
-from pathlib import Path
 
 
 class ExcelExporter:
